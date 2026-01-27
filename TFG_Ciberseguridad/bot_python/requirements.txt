@@ -1,6 +1,24 @@
 # Dependencias del bot de Python
+
+# Telegram Bot
 python-telegram-bot>=20.0
-pymongo>=4.0
-openai>=1.0
+
+# MongoDB (async)
+motor>=3.3.2
+pymongo>=4.6.0
+
+# IA y Análisis
+ollama>=0.1.6
+
+# Monitoreo de archivos
 watchdog>=3.0
+
+# Configuración
 python-dotenv>=1.0
+
+# Utilidades
+aiohttp>=3.9.0
+python-dateutil>=2.8.2
+
+# Logging y monitoreo
+colorlog>=6.8.0

@@ -1,44 +1,282 @@
-# Configuración básica de Suricata
-# Ajusta según tus necesidades
+# Configuración de Suricata para Sistema de Ciberseguridad en Telegram
+# Optimizada para Raspberry Pi 5
 
 %YAML 1.1
 ---
 
-# Configuración de red
+# ==================
+# Variables de Red
+# ==================
 vars:
   address-groups:
     HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
     EXTERNAL_NET: "!$HOME_NET"
+    
+    # IPs de Telegram (para monitoreo específico)
+    TELEGRAM_NET: "[149.154.160.0/20,91.108.4.0/22,91.108.8.0/22,91.108.12.0/22,91.108.16.0/22,91.108.56.0/22,95.161.64.0/20]"
+    
+    # Servidores DNS públicos
+    DNS_SERVERS: "[8.8.8.8,8.8.4.4,1.1.1.1,1.0.0.1]"
+  
+  port-groups:
+    HTTP_PORTS: "80"
+    HTTPS_PORTS: "443"
+    SSH_PORTS: "22"
+    TELEGRAM_PORTS: "[80,443,5222]"
 
-# Configuración de logs
+# ==================
+# Configuración de Logging
+# ==================
 default-log-dir: /var/log/suricata/
 
+# ==================
+# Salidas (Outputs)
+# ==================
 outputs:
+  # EVE JSON - Salida principal para nuestro sistema
   - eve-log:
       enabled: yes
       filetype: regular
       filename: eve.json
+      
+      # Tipos de eventos a registrar
       types:
+        # Alertas de seguridad (CRÍTICO para nuestro sistema)
         - alert:
             tagged-packets: yes
+            metadata: yes
+            payload: yes
+            payload-printable: yes
+            packet: yes
+            http-body: yes
+            http-body-printable: yes
+        
+        # Eventos HTTP
         - http:
             extended: yes
-        - dns
+            dump-all-headers: both
+        
+        # Consultas DNS (importante para detectar dominios maliciosos)
+        - dns:
+            query: yes
+            answer: yes
+        
+        # Conexiones TLS/SSL
         - tls:
             extended: yes
+            session-resumption: yes
+        
+        # Transferencias de archivos
         - files:
-            force-magic: no
-        - smtp
-        - flow
+            force-magic: yes
+            force-hash: [md5, sha256]
+        
+        # Tráfico SMTP
+        - smtp:
+            extended: yes
+        
+        # Flujos de red
+        - flow:
+            # Reducir verbosidad para ahorrar espacio
+        
+        # Estadísticas
+        - stats:
+            totals: yes
+            threads: yes
+        
+  # Log de alertas en formato legacy (opcional)
+  - fast:
+      enabled: yes
+      filename: fast.log
+      append: yes
 
-# Reglas de detección
+  # Log unificado (opcional, consume más espacio)
+  - unified2-alert:
+      enabled: no
+      filename: unified2.alert
+
+# ==================
+# Configuración de Reglas
+# ==================
 default-rule-path: /var/lib/suricata/rules
 rule-files:
-  - suricata.rules
+  - suricata.rules  # Nuestras reglas personalizadas
+  # - /etc/suricata/rules/*.rules  # Reglas adicionales si las hay
 
-# Configuración de captura
+# Actualización de reglas (comentado por defecto)
+# rule-reload: true
+
+# ==================
+# Configuración de Captura (AF-PACKET)
+# ==================
 af-packet:
   - interface: eth0
+    # Configuración de cluster
     cluster-id: 99
     cluster-type: cluster_flow
     defrag: yes
+    
+    # Optimizaciones para Raspberry Pi 5
+    ring-size: 2048  # Reducido para ahorrar memoria
+    block-size: 32768
+    
+    # Usar múltiples threads (la RPi 5 tiene 4 cores)
+    threads: 2
+    
+    # Bypass si el sistema está sobrecargado
+    use-mmap: yes
+    tpacket-v3: yes
+
+# ==================
+# Configuración de Performance
+# Optimizada para Raspberry Pi 5 con 16GB RAM
+# ==================
+
+# Detección de aplicaciones y protocolos
+app-layer:
+  protocols:
+    tls:
+      enabled: yes
+      detection-ports:
+        dp: 443, 5222
+      
+    http:
+      enabled: yes
+      memcap: 64mb
+      
+    dns:
+      tcp:
+        enabled: yes
+      udp:
+        enabled: yes
+      
+    smtp:
+      enabled: yes
+      mime:
+        decode-mime: yes
+        decode-base64: yes
+        decode-quoted-printable: yes
+        header-value-depth: 2000
+        extract-urls: yes
+        body-md5: yes
+      
+    ftp:
+      enabled: yes
+
+# Threading - Configurar para 4 cores de RPi 5
+threading:
+  set-cpu-affinity: no
+  cpu-affinity:
+    - management-cpu-set:
+        cpu: [ 0 ]
+    - receive-cpu-set:
+        cpu: [ 1,2 ]
+    - worker-cpu-set:
+        cpu: [ 1,2,3 ]
+  
+  detect-thread-ratio: 1.5
+
+# Límites de memoria
+stream:
+  memcap: 128mb
+  checksum-validation: yes
+  inline: auto
+  reassembly:
+    memcap: 128mb
+    depth: 1mb
+    toserver-chunk-size: 2560
+    toclient-chunk-size: 2560
+
+# Desfragmentación IP
+defrag:
+  memcap: 64mb
+  hash-size: 65536
+  trackers: 65535
+  max-frags: 65535
+  prealloc: yes
+  timeout: 60
+
+# Flow tracking
+flow:
+  memcap: 128mb
+  hash-size: 65536
+  prealloc: 10000
+  emergency-recovery: 30
+
+# Host table
+host:
+  hash-size: 4096
+  prealloc: 1000
+  memcap: 32mb
+
+# Límites globales de memoria
+engine-analysis:
+  rules-fast-pattern: yes
+  rules: yes
+
+# ==================
+# Detección
+# ==================
+detect:
+  profile: medium
+  custom-values:
+    toclient-groups: 3
+    toserver-groups: 25
+  sgh-mpm-context: auto
+  inspection-recursion-limit: 3000
+
+# Usar múltiples grupos para mejor performance
+mpm-algo: auto
+spm-algo: auto
+
+# ==================
+# Logging y Estadísticas
+# ==================
+logging:
+  default-log-level: info
+  default-output-filter:
+  
+  outputs:
+  - console:
+      enabled: yes
+  - file:
+      enabled: yes
+      level: info
+      filename: suricata.log
+  - syslog:
+      enabled: no
+
+stats:
+  enabled: yes
+  interval: 30
+  decoder-events: true
+
+# ==================
+# PCAP logging (para análisis forense)
+# Deshabilitado por defecto para ahorrar espacio
+# ==================
+pcap-log:
+  enabled: no
+  filename: log.pcap
+  limit: 1000mb
+  max-files: 10
+  compression: none
+  mode: normal
+  use-stream-depth: no
+  honor-pass-rules: no
+
+# ==================
+# Configuración adicional
+# ==================
+
+# Modo de operación
+# IPS mode requiere configuración adicional de iptables/nftables
+# Por ahora usamos IDS mode
+runmode: autofp
+
+# Captura en modo promiscuo
+promisc: yes
+
+# Configuración de checksums
+checksum-checks: auto
+

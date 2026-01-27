@@ -1,0 +1,90 @@
+# Reglas personalizadas de Suricata para detección de amenazas en Telegram
+# Estas reglas ayudan a detectar actividad relacionada con Telegram y posibles amenazas
+
+# ========================================
+# Detección de tráfico de Telegram
+# ========================================
+
+# Detectar conexiones a IPs de Telegram
+alert ip any any -> [149.154.160.0/20,91.108.4.0/22,91.108.8.0/22,91.108.12.0/22,91.108.16.0/22,91.108.56.0/22,95.161.64.0/20] any (msg:"Telegram IP Connection Detected"; sid:1000001; rev:1;)
+
+# Detectar consultas DNS a dominios de Telegram
+alert dns any any -> any any (msg:"Telegram DNS Query"; dns_query; content:"telegram"; nocase; sid:1000002; rev:1;)
+alert dns any any -> any any (msg:"Telegram DNS Query - t.me"; dns_query; content:"t.me"; nocase; sid:1000003; rev:1;)
+
+# Detectar conexiones TLS a Telegram
+alert tls any any -> any any (msg:"Telegram TLS Connection"; tls_sni; content:"telegram"; nocase; sid:1000004; rev:1;)
+
+# ========================================
+# Detección de patrones sospechosos
+# ========================================
+
+# Detectar múltiples conexiones a diferentes IPs de Telegram (posible escaneo)
+alert ip any any -> [149.154.160.0/20,91.108.4.0/22] any (msg:"Multiple Telegram Connections"; threshold: type both, track by_src, count 10, seconds 60; sid:1000010; rev:1;)
+
+# Detectar transferencia de grandes volúmenes de datos (posible exfiltración)
+alert tcp any any -> [149.154.160.0/20,91.108.4.0/22] any (msg:"Large Data Transfer to Telegram"; threshold: type threshold, track by_src, count 100, seconds 60; sid:1000011; rev:1;)
+
+# ========================================
+# Detección de amenazas comunes
+# ========================================
+
+# Detectar intentos de phishing mediante URLs sospechosas
+alert http any any -> any any (msg:"Suspicious URL Pattern - Possible Phishing"; http.uri; pcre:"/\/(login|signin|verify|account|password|credential)/i"; sid:1000020; rev:1;)
+
+# Detectar User-Agents sospechosos
+alert http any any -> any any (msg:"Suspicious User-Agent"; http.user_agent; content:"bot"; nocase; sid:1000021; rev:1;)
+alert http any any -> any any (msg:"Suspicious User-Agent - Scanner"; http.user_agent; content:"nikto"; nocase; sid:1000022; rev:1;)
+alert http any any -> any any (msg:"Suspicious User-Agent - Scanner"; http.user_agent; content:"sqlmap"; nocase; sid:1000023; rev:1;)
+
+# Detectar intentos de SQL Injection
+alert http any any -> any any (msg:"SQL Injection Attempt"; flow:to_server,established; http.uri; pcre:"/(union|select|insert|update|delete|drop|create).*from/i"; sid:1000030; rev:1;)
+
+# Detectar intentos de XSS
+alert http any any -> any any (msg:"XSS Attempt"; flow:to_server,established; http.uri; pcre:"/<script|javascript:|onerror=/i"; sid:1000031; rev:1;)
+
+# ========================================
+# Detección de malware y C2
+# ========================================
+
+# Detectar posibles servidores de comando y control
+alert tcp any any -> any [4444,5555,6666,7777,8888,9999] (msg:"Possible C2 Communication - Common Ports"; flow:to_server,established; sid:1000040; rev:1;)
+
+# Detectar shells reversas comunes
+alert tcp any [80,443,8080] -> any any (msg:"Possible Reverse Shell"; flow:from_server,established; content:"/bin/sh"; sid:1000041; rev:1;)
+alert tcp any [80,443,8080] -> any any (msg:"Possible Reverse Shell - PowerShell"; flow:from_server,established; content:"powershell"; nocase; sid:1000042; rev:1;)
+
+# ========================================
+# Detección de dominios maliciosos conocidos
+# ========================================
+
+# Detectar conexiones a dominios de acortadores de URL (pueden usarse para phishing)
+alert dns any any -> any any (msg:"URL Shortener Detected"; dns_query; content:"bit.ly"; sid:1000050; rev:1;)
+alert dns any any -> any any (msg:"URL Shortener Detected - TinyURL"; dns_query; content:"tinyurl.com"; sid:1000051; rev:1;)
+alert dns any any -> any any (msg:"URL Shortener Detected - goo.gl"; dns_query; content:"goo.gl"; sid:1000052; rev:1;)
+
+# Detectar TLDs sospechosos comúnmente usados en phishing
+alert dns any any -> any any (msg:"Suspicious TLD - .tk"; dns_query; content:".tk"; sid:1000060; rev:1;)
+alert dns any any -> any any (msg:"Suspicious TLD - .ml"; dns_query; content:".ml"; sid:1000061; rev:1;)
+alert dns any any -> any any (msg:"Suspicious TLD - .ga"; dns_query; content:".ga"; sid:1000062; rev:1;)
+alert dns any any -> any any (msg:"Suspicious TLD - .cf"; dns_query; content:".cf"; sid:1000063; rev:1;)
+
+# ========================================
+# Monitoreo de actividad inusual
+# ========================================
+
+# Detectar escaneo de puertos
+alert tcp any any -> any any (msg:"Port Scan Detected"; flags:S; threshold: type both, track by_src, count 20, seconds 10; sid:1000070; rev:1;)
+
+# Detectar fuerza bruta SSH
+alert tcp any any -> any 22 (msg:"SSH Brute Force Attempt"; flags:S; threshold: type both, track by_src, count 5, seconds 60; sid:1000071; rev:1;)
+
+# Detectar escaneo de vulnerabilidades web
+alert http any any -> any any (msg:"Web Vulnerability Scan"; flow:to_server,established; http.uri; pcre:"/(\.\.\/|etc\/passwd|boot\.ini)/i"; sid:1000080; rev:1;)
+
+# ========================================
+# NOTA IMPORTANTE:
+# ========================================
+# Estas reglas son un punto de partida y pueden generar falsos positivos.
+# Es importante afinar las reglas según tu entorno específico y monitorear
+# regularmente los logs para ajustar umbrales y patrones.
