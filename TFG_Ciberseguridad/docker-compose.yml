@@ -1,0 +1,30 @@
+# Docker Compose - Archivo maestro que une todos los servicios
+version: '3.8'
+
+services:
+  suricata:
+    build: ./suricata
+    container_name: suricata
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    volumes:
+      - ./logs:/var/log/suricata
+    restart: unless-stopped
+
+  bot_python:
+    build: ./bot_python
+    container_name: bot_python
+    depends_on:
+      - suricata
+    volumes:
+      - ./logs:/app/logs:ro
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MONGO_URI=${MONGO_URI}
+    restart: unless-stopped
+
+volumes:
+  logs:

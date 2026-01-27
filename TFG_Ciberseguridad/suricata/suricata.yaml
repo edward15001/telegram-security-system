@@ -1,0 +1,44 @@
+# Configuración básica de Suricata
+# Ajusta según tus necesidades
+
+%YAML 1.1
+---
+
+# Configuración de red
+vars:
+  address-groups:
+    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+    EXTERNAL_NET: "!$HOME_NET"
+
+# Configuración de logs
+default-log-dir: /var/log/suricata/
+
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      types:
+        - alert:
+            tagged-packets: yes
+        - http:
+            extended: yes
+        - dns
+        - tls:
+            extended: yes
+        - files:
+            force-magic: no
+        - smtp
+        - flow
+
+# Reglas de detección
+default-rule-path: /var/lib/suricata/rules
+rule-files:
+  - suricata.rules
+
+# Configuración de captura
+af-packet:
+  - interface: eth0
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
