@@ -33,7 +33,7 @@ class AIAnalyzer:
     async def connect(self):
         """Inicia conexión con Ollama y descarga el modelo si es necesario."""
         try:
-            logger.info(f"🧠 Conectando a Ollama: {Config.OLLAMA_HOST}")
+            logger.info(f"Conectando a Ollama: {Config.OLLAMA_HOST}")
             
             # Configurar cliente
             self.client = ollama.Client(host=Config.OLLAMA_HOST)

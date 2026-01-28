@@ -46,42 +46,42 @@ class SistemaCiberseguridad:
         """Inicializa todos los componentes del sistema."""
         try:
             logger.info("="*60)
-            logger.info("🛡️  SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM")
+            logger.info("SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM")
             logger.info("="*60)
             logger.info("")
             
             # Validar configuración
             if not Config.validate():
-                logger.error("❌ Configuración inválida. Abortando...")
+                logger.error("Configuración inválida. Abortando...")
                 return False
             
             # Mostrar configuración
             Config.print_config()
             
-            logger.info("🔧 Inicializando componentes del sistema...")
+            logger.info("Inicializando componentes del sistema...")
             logger.info("")
             
             # Inicializar base de datos
-            logger.info("1️⃣  Conectando a MongoDB...")
+            logger.info("Conectando a MongoDB...")
             await db.connect()
-            logger.info("✅ MongoDB conectado")
+            logger.info("MongoDB conectado")
             logger.info("")
             
             # Inicializar IA
-            logger.info("2️⃣  Conectando a Ollama...")
+            logger.info("Conectando a Ollama...")
             await ai_analyzer.connect()
-            logger.info("✅ Ollama conectado")
+            logger.info("Ollama conectado")
             logger.info("")
             
             logger.info("="*60)
-            logger.info("✅ TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE")
+            logger.info("TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE")
             logger.info("="*60)
             logger.info("")
             
             return True
             
         except Exception as e:
-            logger.error(f"❌ Error durante la inicialización: {e}")
+            logger.error(f"Error durante la inicialización: {e}")
             return False
     
     async def iniciar(self):
@@ -89,12 +89,12 @@ class SistemaCiberseguridad:
         try:
             # Inicializar componentes
             if not await self.inicializar():
-                logger.error("❌ Falló la inicialización. Sistema abortado.")
+                logger.error("Falló la inicialización. Sistema abortado.")
                 return
             
             self.running = True
             
-            logger.info("🚀 Iniciando monitores...")
+            logger.info("Iniciando monitores...")
             logger.info("")
             
             # Crear tareas de monitoreo
@@ -111,31 +111,31 @@ class SistemaCiberseguridad:
             self.tasks = [task_red, task_chat]
             
             logger.info("="*60)
-            logger.info("🟢 SISTEMA EN FUNCIONAMIENTO")
+            logger.info("SISTEMA EN FUNCIONAMIENTO")
             logger.info("="*60)
             logger.info("")
-            logger.info("ℹ️  Presiona Ctrl+C para detener el sistema")
+            logger.info("Presiona Ctrl+C para detener el sistema")
             logger.info("")
             
             # Esperar a que las tareas terminen (o sean canceladas)
             await asyncio.gather(*self.tasks, return_exceptions=True)
             
         except KeyboardInterrupt:
-            logger.info("\n⚠️  Interrupción detectada (Ctrl+C)")
+            logger.info("\nInterrupción detectada (Ctrl+C)")
             await self.detener()
         except Exception as e:
-            logger.error(f"❌ Error crítico en el sistema: {e}")
+            logger.error(f"Error crítico en el sistema: {e}")
             await self.detener()
     
     async def _run_monitor_red(self):
         """Ejecuta el monitor de red con manejo de errores."""
         try:
-            logger.info("👁️  Monitor de Red: Iniciando...")
+            logger.info("Monitor de Red: Iniciando...")
             await monitor_red.iniciar()
         except Exception as e:
-            logger.error(f"❌ Error en Monitor de Red: {e}")
+            logger.error(f"Error en Monitor de Red: {e}")
             if self.running:
-                logger.info("🔄 Reintentando en 10 segundos...")
+                logger.info("Reintentando en 10 segundos...")
                 await asyncio.sleep(10)
                 if self.running:
                     await self._run_monitor_red()
@@ -143,12 +143,12 @@ class SistemaCiberseguridad:
     async def _run_monitor_chat(self):
         """Ejecuta el monitor de chat con manejo de errores."""
         try:
-            logger.info("💬 Monitor de Chat: Iniciando...")
+            logger.info("Monitor de Chat: Iniciando...")
             await monitor_chat.iniciar()
         except Exception as e:
-            logger.error(f"❌ Error en Monitor de Chat: {e}")
+            logger.error(f"Error en Monitor de Chat: {e}")
             if self.running:
-                logger.info("🔄 Reintentando en 10 segundos...")
+                logger.info("Reintentando en 10 segundos...")
                 await asyncio.sleep(10)
                 if self.running:
                     await self._run_monitor_chat()
@@ -157,7 +157,7 @@ class SistemaCiberseguridad:
         """Detiene el sistema de forma ordenada."""
         logger.info("")
         logger.info("="*60)
-        logger.info("🛑 DETENIENDO SISTEMA DE CIBERSEGURIDAD")
+        logger.info("DETENIENDO SISTEMA DE CIBERSEGURIDAD")
         logger.info("="*60)
         
         self.running = False
@@ -172,23 +172,23 @@ class SistemaCiberseguridad:
                     pass
         
         # Cerrar conexiones
-        logger.info("🔌 Cerrando conexiones...")
+        logger.info("Cerrando conexiones...")
         
         try:
             await db.disconnect()
-            logger.info("✅ MongoDB desconectado")
+            logger.info("MongoDB desconectado")
         except Exception as e:
-            logger.error(f"⚠️  Error al cerrar MongoDB: {e}")
+            logger.error(f"Error al cerrar MongoDB: {e}")
         
         # Detener observer de monitor_red si existe
         try:
             monitor_red.detener()
         except Exception as e:
-            logger.error(f"⚠️  Error al detener monitor de red: {e}")
+            logger.error(f"Error al detener monitor de red: {e}")
         
         logger.info("")
         logger.info("="*60)
-        logger.info("✅ SISTEMA DETENIDO CORRECTAMENTE")
+        logger.info("SISTEMA DETENIDO CORRECTAMENTE")
         logger.info("="*60)
 
 
@@ -198,7 +198,7 @@ async def main():
     
     # Configurar manejadores de señales para shutdown graceful
     def signal_handler(signum, frame):
-        logger.info(f"\n⚠️  Señal recibida: {signal.Signals(signum).name}")
+        logger.info(f"\nSeñal recibida: {signal.Signals(signum).name}")
         asyncio.create_task(sistema.detener())
     
     signal.signal(signal.SIGINT, signal_handler)
@@ -212,8 +212,8 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        logger.info("\n👋 Sistema finalizado por el usuario")
+        logger.info("\nSistema finalizado por el usuario")
     except Exception as e:
-        logger.error(f"❌ Error fatal: {e}")
+        logger.error(f"Error fatal: {e}")
         sys.exit(1)
 

@@ -164,12 +164,12 @@ class TestResults:
         print("RESUMEN DE PRUEBAS")
         print("="*80)
         print(f"Total de pruebas: {self.total}")
-        print(f"✅ Correctas: {self.correct} ({self.correct/self.total*100:.1f}%)")
-        print(f"❌ Incorrectas: {self.incorrect} ({self.incorrect/self.total*100:.1f}%)")
+        print(f"Correctas: {self.correct} ({self.correct/self.total*100:.1f}%)")
+        print(f"Incorrectas: {self.incorrect} ({self.incorrect/self.total*100:.1f}%)")
         print("="*80)
         
         if self.incorrect > 0:
-            print("\n❌ PRUEBAS FALLIDAS:")
+            print("\nPRUEBAS FALLIDAS:")
             for detail in self.details:
                 if not detail["correct"]:
                     print(f"\n  Descripción: {detail['description']}")
@@ -214,13 +214,13 @@ async def test_category(category_name: str, test_messages: list, results: TestRe
 async def run_all_tests():
     """Ejecuta todas las pruebas."""
     print("="*80)
-    print("🧪 SISTEMA DE PRUEBAS - Clasificación de Amenazas")
+    print("SISTEMA DE PRUEBAS - Clasificación de Amenazas")
     print("="*80)
     
     # Inicializar sistema
-    print("\n🔧 Inicializando sistema...")
+    print("\nInicializando sistema...")
     await ai_analyzer.connect()
-    print("✅ Sistema inicializado\n")
+    print("Sistema inicializado\n")
     
     results = TestResults()
     
@@ -236,7 +236,7 @@ async def run_all_tests():
     # Guardar resultados si hay DB
     try:
         if db.is_connected():
-            print("\n💾 Guardando resultados en base de datos...")
+            print("\nGuardando resultados en base de datos...")
             for detail in results.details:
                 await db.save_message({
                     "text": detail["message"],
@@ -247,9 +247,9 @@ async def run_all_tests():
                     "test_description": detail["description"],
                     "is_test": True
                 })
-            print("✅ Resultados guardados")
+            print("Resultados guardados")
     except Exception as e:
-        print(f"⚠️  No se pudieron guardar los resultados: {e}")
+        print(f"No se pudieron guardar los resultados: {e}")
     
     # Retornar código de salida basado en resultados
     return 0 if results.incorrect == 0 else 1

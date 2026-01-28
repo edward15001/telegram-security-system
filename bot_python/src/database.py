@@ -48,10 +48,10 @@ class Database:
             await self._create_indexes()
             
             self._connected = True
-            logger.info("✅ Conectado a MongoDB exitosamente")
+            logger.info("Conectado a MongoDB exitosamente")
             
         except Exception as e:
-            logger.error(f"❌ Error al conectar a MongoDB: {e}")
+            logger.error(f"Error al conectar a MongoDB: {e}")
             raise
     
     async def _create_indexes(self):
@@ -68,17 +68,17 @@ class Database:
             await self.alerts.create_index("severity")
             await self.alerts.create_index("event_type")
             
-            logger.info("✅ Índices creados exitosamente")
+            logger.info("Índices creados exitosamente")
             
         except Exception as e:
-            logger.warning(f"⚠️ Error al crear índices: {e}")
+            logger.warning(f"Error al crear índices: {e}")
     
     async def disconnect(self):
         """Cierra la conexión con MongoDB."""
         if self.client:
             self.client.close()
             self._connected = False
-            logger.info("🔌 Desconectado de MongoDB")
+            logger.info("Desconectado de MongoDB")
     
     # ==================
     # Operaciones con Mensajes
@@ -100,11 +100,11 @@ class Database:
                 message_data["timestamp"] = datetime.utcnow()
             
             result = await self.messages.insert_one(message_data)
-            logger.debug(f"💾 Mensaje guardado: {result.inserted_id}")
+            logger.debug(f"Mensaje guardado: {result.inserted_id}")
             return str(result.inserted_id)
             
         except Exception as e:
-            logger.error(f"❌ Error al guardar mensaje: {e}")
+            logger.error(f"Error al guardar mensaje: {e}")
             raise
     
     async def get_recent_messages(self, limit: int = 10, category: Optional[str] = None) -> List[Dict]:
@@ -129,7 +129,7 @@ class Database:
             return messages
             
         except Exception as e:
-            logger.error(f"❌ Error al obtener mensajes: {e}")
+            logger.error(f"Error al obtener mensajes: {e}")
             return []
     
     async def count_messages_by_category(self) -> Dict[str, int]:
@@ -156,7 +156,7 @@ class Database:
             return counts
             
         except Exception as e:
-            logger.error(f"❌ Error al contar mensajes: {e}")
+            logger.error(f"Error al contar mensajes: {e}")
             return {}
     
     # ==================
@@ -178,11 +178,11 @@ class Database:
                 alert_data["timestamp"] = datetime.utcnow()
             
             result = await self.alerts.insert_one(alert_data)
-            logger.debug(f"🚨 Alerta guardada: {result.inserted_id}")
+            logger.debug(f"Alerta guardada: {result.inserted_id}")
             return str(result.inserted_id)
             
         except Exception as e:
-            logger.error(f"❌ Error al guardar alerta: {e}")
+            logger.error(f"Error al guardar alerta: {e}")
             raise
     
     async def get_recent_alerts(self, limit: int = 10, severity: Optional[int] = None) -> List[Dict]:
@@ -207,7 +207,7 @@ class Database:
             return alerts
             
         except Exception as e:
-            logger.error(f"❌ Error al obtener alertas: {e}")
+            logger.error(f"Error al obtener alertas: {e}")
             return []
     
     # ==================
@@ -226,12 +226,12 @@ class Database:
             
             # Guardar estadísticas
             await self.statistics.insert_one(stats)
-            logger.debug("📊 Estadísticas actualizadas")
+            logger.debug("Estadísticas actualizadas")
             
             return stats
             
         except Exception as e:
-            logger.error(f"❌ Error al actualizar estadísticas: {e}")
+            logger.error(f"Error al actualizar estadísticas: {e}")
             return {}
     
     async def get_latest_statistics(self) -> Optional[Dict]:
@@ -244,7 +244,7 @@ class Database:
             return stats
             
         except Exception as e:
-            logger.error(f"❌ Error al obtener estadísticas: {e}")
+            logger.error(f"Error al obtener estadísticas: {e}")
             return None
     
     # ==================
@@ -266,11 +266,11 @@ class Database:
                 pattern_data["timestamp"] = datetime.utcnow()
             
             result = await self.threat_patterns.insert_one(pattern_data)
-            logger.debug(f"🎯 Patrón de amenaza guardado: {result.inserted_id}")
+            logger.debug(f"Patrón de amenaza guardado: {result.inserted_id}")
             return str(result.inserted_id)
             
         except Exception as e:
-            logger.error(f"❌ Error al guardar patrón: {e}")
+            logger.error(f"Error al guardar patrón: {e}")
             raise
     
     async def get_threat_patterns(self, category: Optional[str] = None) -> List[Dict]:
@@ -294,7 +294,7 @@ class Database:
             return patterns
             
         except Exception as e:
-            logger.error(f"❌ Error al obtener patrones: {e}")
+            logger.error(f"Error al obtener patrones: {e}")
             return []
     
     # ==================

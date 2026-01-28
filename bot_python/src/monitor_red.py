@@ -39,17 +39,17 @@ class MonitorRed:
     async def iniciar(self):
         """Inicia el monitoreo de logs de Suricata."""
         try:
-            logger.info("👁️  Iniciando monitor de red...")
+            logger.info("Iniciando monitor de red...")
             
             # Verificar que existe el directorio de logs
             if not os.path.exists(self.logs_path):
-                logger.warning(f"⚠️  Directorio de logs no existe: {self.logs_path}")
+                logger.warning(f"Directorio de logs no existe: {self.logs_path}")
                 logger.info("Creando directorio de logs...")
                 os.makedirs(self.logs_path, exist_ok=True)
             
             # Verificar archivo eve.json
             if not os.path.exists(self.eve_log_path):
-                logger.warning(f"⚠️  Archivo eve.json no existe: {self.eve_log_path}")
+                logger.warning(f"Archivo eve.json no existe: {self.eve_log_path}")
                 logger.info("Esperando que Suricata cree el archivo...")
                 await self._wait_for_log_file()
             
@@ -58,10 +58,10 @@ class MonitorRed:
                 with open(self.eve_log_path, 'r', encoding='utf-8', errors='ignore') as f:
                     f.seek(0, 2)  # Ir al final
                     self.last_position = f.tell()
-                    logger.info(f"📍 Posición inicial: {self.last_position}")
+                    logger.info(f"Posición inicial: {self.last_position}")
             
-            logger.info("✅ Monitor de red iniciado correctamente")
-            logger.info(f"📂 Monitoreando: {self.eve_log_path}")
+            logger.info("Monitor de red iniciado correctamente")
+            logger.info(f"Monitoreando: {self.eve_log_path}")
             
             # Procesar eventos existentes
             await self._process_new_events()
@@ -72,7 +72,7 @@ class MonitorRed:
                 await self._process_new_events()
                 
         except Exception as e:
-            logger.error(f"❌ Error en monitor de red: {e}")
+            logger.error(f"Error en monitor de red: {e}")
             raise
     
     async def _wait_for_log_file(self, timeout: int = 60):
@@ -83,7 +83,7 @@ class MonitorRed:
             elapsed += 1
         
         if not os.path.exists(self.eve_log_path):
-            logger.error(f"❌ Timeout esperando archivo eve.json")
+            logger.error(f"Timeout esperando archivo eve.json")
     
     async def _process_new_events(self):
         """Procesa nuevos eventos en el archivo eve.json."""
@@ -112,11 +112,11 @@ class MonitorRed:
                     event = json.loads(line)
                     await self._process_event(event)
                 except json.JSONDecodeError as e:
-                    logger.warning(f"⚠️  Error al parsear JSON: {e}")
+                    logger.warning(f"Error al parsear JSON: {e}")
                     continue
                     
         except Exception as e:
-            logger.error(f"❌ Error procesando eventos: {e}")
+            logger.error(f"Error procesando eventos: {e}")
     
     async def _process_event(self, event: Dict):
         """Procesa un evento individual de Suricata."""
@@ -140,7 +140,7 @@ class MonitorRed:
                 await self._process_http(event)
             
         except Exception as e:
-            logger.error(f"❌ Error procesando evento: {e}")
+            logger.error(f"Error procesando evento: {e}")
     
     async def _process_alert(self, event: Dict):
         """Procesa una alerta de seguridad."""
@@ -180,12 +180,12 @@ class MonitorRed:
             # Esto se puede implementar más adelante
             
         except Exception as e:
-            logger.error(f"❌ Error procesando alerta: {e}")
+            logger.error(f"Error procesando alerta: {e}")
     
     async def _process_flow(self, event: Dict):
         """Procesa un evento de flujo de red."""
         # Por ahora solo lo registramos, podemos hacer análisis más complejo después
-        logger.debug(f"📊 Flow: {event.get('src_ip')} → {event.get('dest_ip')}")
+        logger.debug(f"Flow: {event.get('src_ip')} → {event.get('dest_ip')}")
     
     async def _process_dns(self, event: Dict):
         """Procesa un evento DNS."""
@@ -198,7 +198,7 @@ class MonitorRed:
         ]
         
         if any(domain in query.lower() for domain in suspicious_domains):
-            logger.info(f"🌐 DNS Query a Telegram: {query}")
+            logger.info(f"DNS Query a Telegram: {query}")
     
     async def _process_tls(self, event: Dict):
         """Procesa un evento TLS."""
@@ -207,7 +207,7 @@ class MonitorRed:
         
         # Registrar conexiones TLS a Telegram
         if 'telegram' in sni.lower():
-            logger.info(f"🔒 TLS Connection a Telegram: {sni}")
+            logger.info(f"TLS Connection a Telegram: {sni}")
     
     async def _process_http(self, event: Dict):
         """Procesa un evento HTTP."""
@@ -215,7 +215,7 @@ class MonitorRed:
         hostname = http.get('hostname', 'Unknown')
         url = http.get('url', 'Unknown')
         
-        logger.debug(f"🌍 HTTP: {hostname}{url}")
+        logger.debug(f"HTTP: {hostname}{url}")
     
     def obtener_ultimas_alertas(self, cantidad: int = 10) -> List[Dict]:
         """
@@ -241,7 +241,7 @@ class MonitorRed:
         if self.observer:
             self.observer.stop()
             self.observer.join()
-            logger.info("🛑 Monitor de red detenido")
+            logger.info("Monitor de red detenido")
 
 
 # Instancia global

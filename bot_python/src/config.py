@@ -100,19 +100,19 @@ Proporciona tu análisis en formato JSON."""
         errors = []
         
         if not cls.TELEGRAM_BOT_TOKEN:
-            errors.append("❌ TELEGRAM_BOT_TOKEN no está configurado")
+            errors.append("TELEGRAM_BOT_TOKEN no está configurado")
         
         if not cls.MONGO_URI:
-            errors.append("❌ MONGO_URI no está configurado")
+            errors.append("MONGO_URI no está configurado")
         
         if not cls.OLLAMA_HOST:
-            errors.append("❌ OLLAMA_HOST no está configurado")
+            errors.append("OLLAMA_HOST no está configurado")
         
         if errors:
             print("\n".join(errors))
             return False
         
-        print("✅ Configuración validada correctamente")
+        print("Configuración validada correctamente")
         return True
     
     @classmethod
@@ -121,13 +121,13 @@ Proporciona tu análisis en formato JSON."""
         print("\n" + "="*50)
         print("CONFIGURACIÓN DEL SISTEMA")
         print("="*50)
-        print(f"🤖 Telegram Bot: {'✅ Configurado' if cls.TELEGRAM_BOT_TOKEN else '❌ No configurado'}")
-        print(f"📦 MongoDB URI: {cls.MONGO_URI}")
-        print(f"🧠 Ollama Host: {cls.OLLAMA_HOST}")
-        print(f"🧠 Ollama Model: {cls.OLLAMA_MODEL}")
-        print(f"📊 Log Level: {cls.LOG_LEVEL}")
-        print(f"🎯 Threat Threshold: {cls.THREAT_THRESHOLD}")
-        print(f"⚡ Cache: {'Enabled' if cls.ENABLE_CACHE else 'Disabled'}")
+        print(f"Telegram Bot: {'Configurado' if cls.TELEGRAM_BOT_TOKEN else 'No configurado'}")
+        print(f"MongoDB URI: {cls.MONGO_URI}")
+        print(f"Ollama Host: {cls.OLLAMA_HOST}")
+        print(f"Ollama Model: {cls.OLLAMA_MODEL}")
+        print(f"Log Level: {cls.LOG_LEVEL}")
+        print(f"Threat Threshold: {cls.THREAT_THRESHOLD}")
+        print(f"Cache: {'Enabled' if cls.ENABLE_CACHE else 'Disabled'}")
         print("="*50 + "\n")
 
 

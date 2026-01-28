@@ -34,15 +34,15 @@ class MonitorChat:
     async def iniciar(self):
         """Inicia el bot de Telegram."""
         try:
-            logger.info("💬 Iniciando monitor de chat...")
+            logger.info("Iniciando monitor de chat...")
             
             # Verificar token
             if not self.telegram_token:
-                logger.error("❌ TELEGRAM_BOT_TOKEN no configurado")
+                logger.error("TELEGRAM_BOT_TOKEN no configurado")
                 raise ValueError("Token de Telegram no configurado")
             
             # Inicializar IA y base de datos
-            logger.info("🔧 Inicializando componentes...")
+            logger.info("Inicializando componentes...")
             await ai_analyzer.connect()
             await db.connect()
             
@@ -50,11 +50,11 @@ class MonitorChat:
             self.app = Application.builder().token(self.telegram_token).build()
             self._registrar_handlers()
             
-            logger.info("✅ Monitor de chat iniciado correctamente")
+            logger.info("Monitor de chat iniciado correctamente")
             
             # Obtener info del bot
             bot_info = await self.app.bot.get_me()
-            logger.info(f"🤖 Bot de Telegram: @{bot_info.username}")
+            logger.info(f"Bot de Telegram: @{bot_info.username}")
             
             # Inicializar y ejecutar bot
             await self.app.initialize()
@@ -66,7 +66,7 @@ class MonitorChat:
                 await asyncio.sleep(1)
                 
         except Exception as e:
-            logger.error(f"❌ Error al iniciar monitor de chat: {e}")
+            logger.error(f"Error al iniciar monitor de chat: {e}")
             raise
     
     def _registrar_handlers(self):
@@ -85,7 +85,7 @@ class MonitorChat:
             MessageHandler(filters.TEXT & ~filters.COMMAND, self.procesar_mensaje)
         )
         
-        logger.info("✅ Handlers registrados")
+        logger.info("Handlers registrados")
     
     # ==================
     # Comandos del Bot
@@ -94,14 +94,14 @@ class MonitorChat:
     async def cmd_start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Manejador del comando /start."""
         mensaje = """
-🛡️ **Sistema de Ciberseguridad Inteligente**
+**Sistema de Ciberseguridad Inteligente**
 
 ¡Bienvenido! Soy tu asistente de seguridad para Telegram.
 
 Analizo mensajes en tiempo real para detectar:
-🎣 Phishing
-📧 Spam
-🎭 Ingeniería Social
+Phishing
+Spam
+Ingeniería Social
 
 **Comandos disponibles:**
 /help - Ver ayuda completa
@@ -118,7 +118,7 @@ Envía cualquier mensaje y lo analizaré automáticamente.
     async def cmd_help(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Manejador del comando /help."""
         mensaje = """
-📚 **Ayuda del Sistema de Ciberseguridad**
+**Ayuda del Sistema de Ciberseguridad**
 
 **Comandos:**
 
@@ -140,10 +140,10 @@ Recibirás un informe con:
 - Recomendaciones
 
 **Categorías de Amenazas:**
-🎣 PHISHING - Robo de credenciales
-📧 SPAM - Contenido no solicitado
-🎭 SOCIAL_ENGINEERING - Manipulación psicológica
-✅ SAFE - Mensaje seguro
+PHISHING - Robo de credenciales
+SPAM - Contenido no solicitado
+SOCIAL_ENGINEERING - Manipulación psicológica
+SAFE - Mensaje seguro
 """
         await update.message.reply_text(mensaje, parse_mode='Markdown')
     
@@ -157,7 +157,7 @@ Recibirás un informe con:
                     cantidad = int(context.args[0])
                     cantidad = min(cantidad, 20)  # Máximo 20
                 except ValueError:
-                    await update.message.reply_text("⚠️ Cantidad inválida. Usando 5.")
+                    await update.message.reply_text("Cantidad inválida. Usando 5.")
             
             # Obtener mensajes peligrosos
             threats = await db.get_recent_messages(limit=cantidad * 3)  # Obtener más para filtrar
@@ -166,10 +166,10 @@ Recibirás un informe con:
             threats = [m for m in threats if m.get('category') != 'SAFE'][:cantidad]
             
             if not threats:
-                await update.message.reply_text("✅ No hay amenazas recientes detectadas.")
+                await update.message.reply_text("No hay amenazas recientes detectadas.")
                 return
             
-            mensaje = f"🚨 **Últimas {len(threats)} Amenazas Detectadas**\n\n"
+            mensaje = f"Últimas {len(threats)} Amenazas Detectadas\n\n"
             
             for i, threat in enumerate(threats, 1):
                 categoria = threat.get('category', 'UNKNOWN')
@@ -187,36 +187,36 @@ Recibirás un informe con:
             
         except Exception as e:
             logger.error(f"Error en cmd_alertas: {e}")
-            await update.message.reply_text("❌ Error al obtener alertas")
+            await update.message.reply_text("Error al obtener alertas")
     
     async def cmd_estado(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Manejador del comando /estado."""
         try:
             # Verificar estado de componentes
-            db_status = "✅ Conectado" if await db.health_check() else "❌ Desconectado"
-            ai_status = "✅ Conectado" if await ai_analyzer.health_check() else "❌ Desconectado"
+            db_status = "Conectado" if await db.health_check() else "Desconectado"
+            ai_status = "Conectado" if await ai_analyzer.health_check() else "Desconectado"
             
             mensaje = f"""
-📊 **Estado del Sistema**
+Estado del Sistema
 
-**Componentes:**
-🗄️ MongoDB: {db_status}
-🧠 Ollama IA: {ai_status}
-🤖 Bot Telegram: ✅ Activo
+Componentes:
+MongoDB: {db_status}
+Ollama IA: {ai_status}
+Bot Telegram: Activo
 
 **Modelo IA:** {Config.OLLAMA_MODEL}
 **Umbral de Amenaza:** {Config.THREAT_THRESHOLD}%
 
 **Estadísticas de Sesión:**
-📨 Mensajes analizados: {self.stats['messages_analyzed']}
-⚠️ Amenazas detectadas: {self.stats['threats_detected']}
-✅ Mensajes seguros: {self.stats['safe_messages']}
+Mensajes analizados: {self.stats['messages_analyzed']}
+Amenazas detectadas: {self.stats['threats_detected']}
+Mensajes seguros: {self.stats['safe_messages']}
 """
             await update.message.reply_text(mensaje, parse_mode='Markdown')
             
         except Exception as e:
             logger.error(f"Error en cmd_estado: {e}")
-            await update.message.reply_text("❌ Error al obtener estado")
+            await update.message.reply_text("Error al obtener estado")
     
     async def cmd_stats(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Manejador del comando /stats."""
@@ -226,11 +226,11 @@ Recibirás un informe con:
             total = sum(stats.values())
             
             if total == 0:
-                await update.message.reply_text("📊 No hay estadísticas disponibles aún.")
+                await update.message.reply_text("No hay estadísticas disponibles aún.")
                 return
             
-            mensaje = "📊 **Estadísticas Globales**\n\n"
-            mensaje += f"**Total de mensajes:** {total}\n\n"
+            mensaje = "Estadísticas Globales\n\n"
+            mensaje += f"Total de mensajes: {total}\n\n"
             
             for category in ['PHISHING', 'SPAM', 'SOCIAL_ENGINEERING', 'SAFE']:
                 count = stats.get(category, 0)
@@ -242,16 +242,16 @@ Recibirás un informe con:
             
         except Exception as e:
             logger.error(f"Error en cmd_stats: {e}")
-            await update.message.reply_text("❌ Error al obtener estadísticas")
+            await update.message.reply_text("Error al obtener estadísticas")
     
     async def cmd_analizar(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Manejador del comando /analizar."""
         if not context.args:
-            await update.message.reply_text("⚠️ Uso: /analizar <mensaje a analizar>")
+            await update.message.reply_text("Uso: /analizar <mensaje a analizar>")
             return
         
         mensaje_analizar = " ".join(context.args)
-        await update.message.reply_text("🔍 Analizando mensaje...")
+        await update.message.reply_text("Analizando mensaje...")
         
         # Procesar mensaje
         await self._analizar_y_responder(update, mensaje_analizar, is_command=True)
@@ -275,10 +275,10 @@ Recibirás un informe con:
             messages = await db.get_recent_messages(limit=10, category=category)
             
             if not messages:
-                await update.message.reply_text("📭 No hay mensajes recientes.")
+                await update.message.reply_text("No hay mensajes recientes.")
                 return
             
-            mensaje = f"📬 **Mensajes Recientes"
+            mensaje = f"Mensajes Recientes"
             if category:
                 mensaje += f" - {category}"
             mensaje += "**\n\n"
@@ -297,7 +297,7 @@ Recibirás un informe con:
             
         except Exception as e:
             logger.error(f"Error en cmd_recientes: {e}")
-            await update.message.reply_text("❌ Error al obtener mensajes")
+            await update.message.reply_text("Error al obtener mensajes")
     
     # ==================
     # Procesamiento de Mensajes
@@ -342,7 +342,7 @@ Recibirás un informe con:
             
             # Si es una amenaza severa, enviar alerta adicional
             if resultado['category'] != 'SAFE' and resultado['confidence'] >= Config.THREAT_THRESHOLD:
-                alerta = f"⚠️ **ALERTA DE SEGURIDAD**\n\n"
+                alerta = f"**ALERTA DE SEGURIDAD**\n\n"
                 alerta += f"Se detectó una amenaza de tipo **{resultado['category']}** "
                 alerta += f"con {resultado['confidence']}% de confianza.\n\n"
                 alerta += "**Recomendación:** No interactúes con este mensaje."
@@ -350,8 +350,8 @@ Recibirás un informe con:
                 await update.message.reply_text(alerta, parse_mode='Markdown')
             
         except Exception as e:
-            logger.error(f"❌ Error al procesar mensaje: {e}")
-            await update.message.reply_text("❌ Error al analizar el mensaje. Intenta nuevamente.")
+            logger.error(f"Error al procesar mensaje: {e}")
+            await update.message.reply_text("Error al analizar el mensaje. Intenta nuevamente.")
     
     def _formatear_respuesta(self, resultado: dict) -> str:
         """Formatea el resultado del análisis para mostrar al usuario."""
@@ -385,9 +385,9 @@ Recibirás un informe con:
         
         # Recomendación
         if categoria != 'SAFE':
-            mensaje += f"\n⚠️ **Recomendación:** Procede con precaución."
+            mensaje += f"\n**Recomendación:** Procede con precaución."
         else:
-            mensaje += f"\n✅ **Recomendación:** Este mensaje parece seguro."
+            mensaje += f"\n**Recomendación:** Este mensaje parece seguro."
         
         return mensaje
 
