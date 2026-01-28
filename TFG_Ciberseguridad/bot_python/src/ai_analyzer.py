@@ -42,10 +42,10 @@ class AIAnalyzer:
             await self._ensure_model_available()
             
             self._connected = True
-            logger.info(f"✅ Ollama conectado - Modelo: {self.model}")
+            logger.info(f"Ollama conectado - Modelo: {self.model}")
             
         except Exception as e:
-            logger.error(f"❌ Error al conectar a Ollama: {e}")
+            logger.error(f"Error al conectar a Ollama: {e}")
             raise
     
     async def _ensure_model_available(self):
@@ -53,17 +53,17 @@ class AIAnalyzer:
         try:
             # Listar modelos disponibles
             models = self.client.list()
-            model_names = [model['name'] for model in models.get('models', [])]
+            model_names = [model.get('model', model.get('name', '')) for model in models.get('models', [])]
             
             if self.model not in model_names:
-                logger.info(f"📥 Descargando modelo {self.model}... (esto puede tardar varios minutos)")
+                logger.info(f"Descargando modelo {self.model}... (esto puede tardar varios minutos)")
                 self.client.pull(self.model)
-                logger.info(f"✅ Modelo {self.model} descargado")
+                logger.info(f"Modelo {self.model} descargado")
             else:
-                logger.info(f"✅ Modelo {self.model} ya está disponible")
+                logger.info(f"Modelo {self.model} ya está disponible")
                 
         except Exception as e:
-            logger.error(f"❌ Error al verificar/descargar modelo: {e}")
+            logger.error(f"Error al verificar/descargar modelo: {e}")
             raise
     
     def _get_from_cache(self, message: str) -> Optional[Dict]:
@@ -77,7 +77,7 @@ class AIAnalyzer:
             
             # Verificar si el caché ha expirado
             if datetime.now() - timestamp < timedelta(seconds=Config.CACHE_TTL):
-                logger.debug("📦 Resultado obtenido del caché")
+                logger.debug("Resultado obtenido del caché")
                 return cached_data
             else:
                 # Eliminar caché expirado
@@ -127,7 +127,7 @@ class AIAnalyzer:
             if cached_result:
                 return cached_result
             
-            logger.info(f"🔍 Analizando mensaje: {message[:50]}...")
+            logger.info(f"Analizando mensaje: {message[:50]}...")
             
             # 1. Extracción de características
             features = self._extract_features(message)
@@ -145,14 +145,14 @@ class AIAnalyzer:
             self._save_to_cache(message, final_result)
             
             logger.info(
-                f"✅ Análisis completado: {final_result['category']} "
+                f"Análisis completado: {final_result['category']} "
                 f"(Confianza: {final_result['confidence']}%)"
             )
             
             return final_result
             
         except Exception as e:
-            logger.error(f"❌ Error en análisis: {e}")
+            logger.error(f"Error en análisis: {e}")
             # Retornar análisis de fallback
             return self._fallback_analysis(message)
     
@@ -217,7 +217,7 @@ class AIAnalyzer:
             return ai_result
             
         except Exception as e:
-            logger.error(f"❌ Error en clasificación con IA: {e}")
+            logger.error(f"Error en clasificación con IA: {e}")
             return {
                 "category": "UNKNOWN",
                 "confidence": 0,

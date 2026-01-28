@@ -1,17 +1,17 @@
-# 🛡️ Sistema de Ciberseguridad Inteligente en Telegram
+# Sistema de Ciberseguridad Inteligente en Telegram
 
 Sistema completo de detección y clasificación de amenazas en mensajes de Telegram usando análisis de IA local con Ollama, monitoreo de red con Suricata IDS, y almacenamiento en MongoDB. Optimizado para ejecutarse en Raspberry Pi 5.
 
-## 📋 Descripción
+## Descripción
 
 Este sistema analiza mensajes de Telegram en tiempo real para detectar:
-- 🎣 **Phishing**: Intentos de robo de credenciales o información sensible
-- 📧 **Spam**: Mensajes comerciales no solicitados y contenido repetitivo
-- 🎭 **Ingeniería Social**: Manipulación psicológica para obtener información o acciones
+- Phishing: Intentos de robo de credenciales o información sensible
+- Spam: Mensajes comerciales no solicitados y contenido repetitivo
+- Ingeniería Social: Manipulación psicológica para obtener información o acciones
 
 Además, monitorea el tráfico de red relacionado con Telegram usando Suricata IDS para detectar patrones de ataque y actividad maliciosa.
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 El sistema está compuesto por varios servicios en Docker:
 
@@ -43,19 +43,19 @@ El sistema está compuesto por varios servicios en Docker:
 └─────────────────────────────────────────────────────┘
 ```
 
-## ✨ Características
+## Características
 
-- ✅ Análisis de mensajes con IA local (sin enviar datos a servicios externos)
-- ✅ Clasificación multi-nivel: Phishing, Spam, Ingeniería Social
-- ✅ Detección basada en patrones y análisis semántico
-- ✅ Monitoreo de tráfico de red con Suricata
-- ✅ Almacenamiento persistente en MongoDB
-- ✅ Bot de Telegram interactivo con comandos
-- ✅ Sistema de puntuación de riesgo
-- ✅ Caché de resultados para optimizar rendimiento
-- ✅ Logs estructurados y estadísticas en tiempo real
+- Análisis de mensajes con IA local (sin enviar datos a servicios externos)
+- Clasificación multi-nivel: Phishing, Spam, Ingeniería Social
+- Detección basada en patrones y análisis semántico
+- Monitoreo de tráfico de red con Suricata
+- Almacenamiento persistente en MongoDB
+- Bot de Telegram interactivo con comandos
+- Sistema de puntuación de riesgo
+- Caché de resultados para optimizar rendimiento
+- Logs estructurados y estadísticas en tiempo real
 
-## 🔧 Requisitos
+## Requisitos
 
 ### Hardware
 - **Raspberry Pi 5** (recomendado con 8GB+ de RAM, soporta hasta 16GB)
@@ -67,7 +67,7 @@ El sistema está compuesto por varios servicios en Docker:
 - Python 3.11+
 - Git
 
-## 📦 Instalación
+## Instalación
 
 ### 1. Clonar el Repositorio
 
@@ -89,7 +89,7 @@ Configura las siguientes variables:
 
 ```bash
 # Token del bot de Telegram (obtener de @BotFather)
-TELEGRAM_BOT_TOKEN=tu_token_aqui
+TELEGRAM_BOT_TOKEN=7646078215:TOKEN_ELIMINADO_HISTORIAL
 
 # Configuración de Ollama
 OLLAMA_MODEL=mistral:7b-instruct  # o llama2:13b, phi:latest
@@ -138,7 +138,7 @@ docker-compose exec ollama ollama pull mistral:7b-instruct
 
 **Nota**: La descarga del modelo puede tardar varios minutos dependiendo de tu conexión.
 
-## 🚀 Uso
+## Uso
 
 ### Interactuar con el Bot
 
@@ -159,14 +159,14 @@ docker-compose exec ollama ollama pull mistral:7b-instruct
 ### Análisis Automático
 
 Simplemente envía cualquier mensaje al bot y recibirás:
-- ✅ Categoría de amenaza (PHISHING, SPAM, SOCIAL_ENGINEERING, SAFE)
-- 📊 Nivel de confianza (0-100%)
-- 🎯 Score de riesgo
-- 📝 Análisis detallado
-- 🔍 Indicadores detectados
-- 💡 Recomendaciones
+- Categoría de amenaza (PHISHING, SPAM, SOCIAL_ENGINEERING, SAFE)
+- Nivel de confianza (0-100%)
+- Score de riesgo
+- Análisis detallado
+- Indicadores detectados
+- Recomendaciones
 
-## 🧪 Testing
+## Testing
 
 Ejecutar la suite de pruebas:
 
@@ -180,7 +180,7 @@ Esto probará la detección de:
 - Ingeniería social
 - Mensajes seguros
 
-## 📊 Monitoreo
+## Monitoreo
 
 ### Ver Estado del Sistema
 
@@ -220,7 +220,7 @@ docker-compose exec suricata tail -f /var/log/suricata/fast.log
 docker-compose exec suricata tail -f /var/log/suricata/eve.json | jq
 ```
 
-## 🔄 Mantenimiento
+## Mantenimiento
 
 ### Detener el Sistema
 
@@ -252,7 +252,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-## 📈 Rendimiento en Raspberry Pi 5
+## Rendimiento en Raspberry Pi 5
 
 Configuración optimizada para:
 - **CPU**: 4 cores aprovechados con threading
@@ -273,15 +273,15 @@ docker stats
 htop
 ```
 
-## 🔐 Seguridad
+## Seguridad
 
-- ✅ No se envían datos a servicios externos
-- ✅ Modelo de IA ejecutado localmente
-- ✅ Tráfico cifrado con TLS
-- ✅ Base de datos sin contraseña (solo acceso local)
-- ⚠️ **Importante**: Mantén tu `.env` seguro y nunca lo subas a git
+- No se envían datos a servicios externos
+- Modelo de IA ejecutado localmente
+- Tráfico cifrado con TLS
+- Base de datos sin contraseña (solo acceso local)
+- **Importante**: Mantén tu `.env` seguro y nunca lo subas a git
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### El bot no responde
 
@@ -330,12 +330,12 @@ docker-compose logs mongodb
 docker-compose restart mongodb
 ```
 
-## 📚 Documentación Adicional
+## Documentación Adicional
 
 - [Plan de Implementación](../.gemini/antigravity/brain/*/implementation_plan.md)
 - [Tareas del Proyecto](../.gemini/antigravity/brain/*/task.md)
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Este es un proyecto de TFG (Trabajo Fin de Grado). Las contribuciones son bienvenidas:
 
@@ -345,15 +345,15 @@ Este es un proyecto de TFG (Trabajo Fin de Grado). Las contribuciones son bienve
 4. Push a la branch (`git push origin feature/nueva-funcionalidad`)
 5. Crea un Pull Request
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto es parte de un Trabajo Fin de Grado de Ingeniería de Computadores.
 
-## 👤 Autor
+## Autor
 
 **Edward** - Estudiante de Ingeniería de Computadores
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 - [Ollama](https://ollama.ai/) - Motor de IA local
 - [Suricata](https://suricata.io/) - Sistema de detección de intrusiones
@@ -362,4 +362,4 @@ Este proyecto es parte de un Trabajo Fin de Grado de Ingeniería de Computadores
 
 ---
 
-**⚡ ¡Sistema listo para detectar amenazas en Telegram!** 🛡️
+**¡Sistema listo para detectar amenazas en Telegram!** 

@@ -9,31 +9,11 @@ import asyncio
 import logging
 from datetime import datetime
 from typing import Dict, List, Optional
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
-from pathlib import Path
 
 from config import Config
 from database import db
 
 logger = logging.getLogger(__name__)
-
-
-class SuricataEventHandler(FileSystemEventHandler):
-    """Manejador de eventos para cambios en los logs de Suricata."""
-    
-    def __init__(self, monitor):
-        super().__init__()
-        self.monitor = monitor
-        self.last_position = 0
-    
-    def on_modified(self, event):
-        """Se ejecuta cuando el archivo eve.json es modificado."""
-        if event.src_path.endswith("eve.json"):
-            try:
-                asyncio.create_task(self.monitor._process_new_events())
-            except Exception as e:
-                logger.error(f"Error al procesar nuevos eventos: {e}")
 
 
 class MonitorRed:
@@ -79,12 +59,6 @@ class MonitorRed:
                     f.seek(0, 2)  # Ir al final
                     self.last_position = f.tell()
                     logger.info(f"📍 Posición inicial: {self.last_position}")
-            
-            # Configurar watchdog para monitorear cambios
-            event_handler = SuricataEventHandler(self)
-            self.observer = Observer()
-            self.observer.schedule(event_handler, self.logs_path, recursive=False)
-            self.observer.start()
             
             logger.info("✅ Monitor de red iniciado correctamente")
             logger.info(f"📂 Monitoreando: {self.eve_log_path}")

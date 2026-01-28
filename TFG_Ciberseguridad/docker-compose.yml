@@ -64,7 +64,7 @@ services:
       - mongodb
       - ollama
     volumes:
-      - ./logs:/app/logs:ro
+      - ./logs:/app/logs
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - MONGO_URI=mongodb://mongodb:27017/ciberseguridad

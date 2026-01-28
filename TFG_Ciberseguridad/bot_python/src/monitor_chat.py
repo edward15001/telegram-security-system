@@ -5,10 +5,11 @@ Este módulo gestiona las interacciones con el bot de Telegram y la IA.
 
 import os
 import logging
+import asyncio
 from datetime import datetime
 from typing import Optional
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+from telegram.ext import Application,CommandHandler, MessageHandler, filters, ContextTypes
 
 from config import Config
 from database import db
@@ -50,11 +51,20 @@ class MonitorChat:
             self._registrar_handlers()
             
             logger.info("✅ Monitor de chat iniciado correctamente")
-            logger.info(f"🤖 Bot de Telegram: @{(await self.app.bot.get_me()).username}")
             
-            # Ejecutar bot
-            await self.app.run_polling(allowed_updates=Update.ALL_TYPES)
+            # Obtener info del bot
+            bot_info = await self.app.bot.get_me()
+            logger.info(f"🤖 Bot de Telegram: @{bot_info.username}")
             
+            # Inicializar y ejecutar bot
+            await self.app.initialize()
+            await self.app.start()
+            await self.app.updater.start_polling(allowed_updates=Update.ALL_TYPES)
+            
+            # Mantener el bot ejecutándose
+            while True:
+                await asyncio.sleep(1)
+                
         except Exception as e:
             logger.error(f"❌ Error al iniciar monitor de chat: {e}")
             raise

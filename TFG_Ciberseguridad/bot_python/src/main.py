@@ -8,9 +8,13 @@ import logging
 import signal
 import sys
 from datetime import datetime
+from pathlib import Path
 
 # Importar configuración primero
 from config import Config
+
+# Crear directorio de logs si no existe
+Path('logs').mkdir(exist_ok=True)
 
 # Configurar logging
 logging.basicConfig(
