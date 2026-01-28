@@ -132,3 +132,5 @@
 [1 - Suricata-Main] 2026-01-28 12:52:36 Warning: af-packet: eth0: AF_PACKET tpacket-v3 is recommended for non-inline operation
 [1 - Suricata-Main] 2026-01-28 12:52:36 Info: runmodes: Going to use 2 ReceiveAFP receive thread(s)
 [1 - Suricata-Main] 2026-01-28 12:52:36 Notice: threads: Threads created -> RX: 2 W: 30 FM: 1 FR: 1   Engine started.
+[1 - Suricata-Main] 2026-01-28 13:02:34 Notice: suricata: Signal Received.  Stopping engine.
+[1 - Suricata-Main] 2026-01-28 13:02:35 Info: suricata: time elapsed 599.375s
