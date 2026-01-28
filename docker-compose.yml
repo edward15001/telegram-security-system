@@ -30,6 +30,12 @@ services:
     restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     networks:
       - ciberseg_network
 
@@ -46,6 +52,12 @@ services:
     cpus: 4.0
     networks:
       - ciberseg_network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:11434" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     deploy:
       resources:
         reservations:
@@ -60,9 +72,12 @@ services:
     build: ./bot_python
     container_name: bot_python
     depends_on:
-      - suricata
-      - mongodb
-      - ollama
+      suricata:
+        condition: service_started
+      mongodb:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
     volumes:
       - ./logs:/app/logs
     environment:
