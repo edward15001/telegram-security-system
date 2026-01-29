@@ -4,6 +4,7 @@ Este módulo gestiona las interacciones con el bot de Telegram y la IA.
 """
 
 import os
+import re
 import logging
 import asyncio
 from datetime import datetime
@@ -338,26 +339,26 @@ Mensajes seguros: {self.stats['safe_messages']}
             # Formatear respuesta
             respuesta = self._formatear_respuesta(resultado)
             
-            await update.message.reply_text(respuesta, parse_mode='Markdown')
+            await update.message.reply_text(respuesta, parse_mode='HTML')
             
             # Si es una amenaza severa, enviar alerta adicional
             if resultado['category'] != 'SAFE' and resultado['confidence'] >= Config.THREAT_THRESHOLD:
-                alerta = f"**ALERTA DE SEGURIDAD**\n\n"
-                alerta += f"Se detectó una amenaza de tipo **{resultado['category']}** "
+                alerta = f"<b>⚠️ ALERTA DE SEGURIDAD</b>\n\n"
+                alerta += f"Se detectó una amenaza de tipo <b>{resultado['category']}</b> "
                 alerta += f"con {resultado['confidence']}% de confianza.\n\n"
-                alerta += "**Recomendación:** No interactúes con este mensaje."
+                alerta += "<b>Recomendación:</b> No interactúes con este mensaje."
                 
-                await update.message.reply_text(alerta, parse_mode='Markdown')
+                await update.message.reply_text(alerta, parse_mode='HTML')
             
         except Exception as e:
             logger.error(f"Error al procesar mensaje: {e}")
             await update.message.reply_text("Error al analizar el mensaje. Intenta nuevamente.")
     
     def _formatear_respuesta(self, resultado: dict) -> str:
-        """Formatea el resultado del análisis para mostrar al usuario."""
+        """Formatea el resultado del análisis para mostrar al usuario (HTML)."""
         categoria = resultado['category']
         confianza = resultado['confidence']
-        razon = resultado['reasoning']
+        razon = self._escape_html(resultado['reasoning'])
         indicadores = resultado['indicators']
         risk_score = resultado.get('risk_score', 0)
         
@@ -371,25 +372,36 @@ Mensajes seguros: {self.stats['safe_messages']}
         }
         emoji = emoji_map.get(categoria, "⚠️")
         
-        # Construir mensaje
-        mensaje = f"{emoji} **Análisis Completado**\n\n"
-        mensaje += f"**Categoría:** {categoria}\n"
-        mensaje += f"**Confianza:** {confianza}%\n"
-        mensaje += f"**Score de Riesgo:** {risk_score}/100\n\n"
-        mensaje += f"**Análisis:**\n{razon}\n"
+        # Construir mensaje en HTML
+        mensaje = f"{emoji} <b>Análisis Completado</b>\n\n"
+        mensaje += f"<b>Categoría:</b> {categoria}\n"
+        mensaje += f"<b>Confianza:</b> {confianza}%\n"
+        mensaje += f"<b>Score de Riesgo:</b> {risk_score}/100\n\n"
+        mensaje += f"<b>Análisis:</b>\n{razon}\n"
         
         if indicadores:
-            mensaje += f"\n**Indicadores Detectados:**\n"
+            mensaje += f"\n<b>Indicadores Detectados:</b>\n"
             for ind in indicadores[:5]:  # Máximo 5 indicadores
-                mensaje += f"• {ind}\n"
+                ind_escaped = self._escape_html(ind)
+                mensaje += f"• {ind_escaped}\n"
         
         # Recomendación
         if categoria != 'SAFE':
-            mensaje += f"\n**Recomendación:** Procede con precaución."
+            mensaje += f"\n<b>Recomendación:</b> Procede con precaución."
         else:
-            mensaje += f"\n**Recomendación:** Este mensaje parece seguro."
+            mensaje += f"\n<b>Recomendación:</b> Este mensaje parece seguro."
         
         return mensaje
+    
+    def _escape_html(self, text: str) -> str:
+        """Escapa caracteres especiales de HTML para Telegram."""
+        if not text:
+            return ""
+        # Caracteres reservados en HTML
+        text = text.replace('&', '&amp;')
+        text = text.replace('<', '&lt;')
+        text = text.replace('>', '&gt;')
+        return text
 
 
 # Instancia global

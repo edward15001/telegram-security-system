@@ -76,6 +76,20 @@ SPAM_MESSAGES = [
         Es urgente, necesito el dinero hoy. Gracias!""",
         "expected": "SPAM",
         "description": "Spam con dirección de criptomoneda"
+    },
+    {
+        "text": """🔥 ¡SE FILTRÓ TODO! 🔥 El pack completo de la famosa tiktoker y videos privados 
+        de usuarios locales. Únete antes de que borren el canal. 👇👇👇 
+        t . me / +k8s9f_enlace_falso_join (Entrada gratis solo por hoy)""",
+        "expected": "SPAM",
+        "description": "Spam con URL de Telegram ofuscada (t . me)"
+    },
+    {
+        "text": """💎 GEMAS CRYPTO 1000x 💎 No te pierdas la preventa de $SCAMCOIN
+        ✅ Listada mañana en Binance ✅ Liquidez bloqueada
+        Compra ahora: telegram . me / fake_crypto_group""",
+        "expected": "SPAM",
+        "description": "Scam crypto con URL ofuscada de Telegram"
     }
 ]
 
@@ -103,6 +117,14 @@ SOCIAL_ENGINEERING_MESSAGES = [
         Es solo para verificación, no te preocupes.""",
         "expected": "SOCIAL_ENGINEERING",
         "description": "Pretexting - solicitud de información personal"
+    },
+    {
+        "text": """Hola mamá/papá, mi teléfono se cayó y la pantalla no funciona. 
+        Este es mi número temporal mientras lo arreglo. No puedo recibir llamadas aquí, 
+        por favor envíame un mensaje urgente por WhatsApp a este número: +34 600 000 000. 
+        Necesito que me hagas un favor.""",
+        "expected": "SOCIAL_ENGINEERING",
+        "description": "Hi mom/dad scam - suplantación de familiar (NO es phishing)"
     }
 ]
 

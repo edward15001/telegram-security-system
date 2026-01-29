@@ -15,7 +15,7 @@ from utils import (
     extract_urls, is_suspicious_url, is_url_shortener,
     extract_phone_numbers, extract_emails, extract_crypto_addresses,
     count_suspicious_keywords, has_excessive_caps, has_excessive_emojis,
-    calculate_risk_score
+    calculate_risk_score, extract_telegram_links, has_obfuscated_urls
 )
 
 logger = logging.getLogger(__name__)
@@ -159,6 +159,7 @@ class AIAnalyzer:
     def _extract_features(self, message: str) -> Dict[str, Any]:
         """Extrae características relevantes del mensaje."""
         urls = extract_urls(message)
+        telegram_links = extract_telegram_links(message)
         
         features = {
             "length": len(message),
@@ -166,6 +167,8 @@ class AIAnalyzer:
             "url_count": len(urls),
             "suspicious_urls": [url for url in urls if is_suspicious_url(url)],
             "url_shorteners": [url for url in urls if is_url_shortener(url)],
+            "telegram_links": telegram_links,
+            "has_obfuscated_urls": has_obfuscated_urls(message),
             "phone_numbers": extract_phone_numbers(message),
             "emails": extract_emails(message),
             "crypto_addresses": extract_crypto_addresses(message),
@@ -290,7 +293,16 @@ class AIAnalyzer:
             excessive_emojis=features['excessive_emojis']
         )
         
-        return score
+        # Penalizar fuertemente las URLs ofuscadas (técnica de evasión)
+        if features.get('has_obfuscated_urls', False):
+            score += 25
+        
+        # Añadir riesgo por enlaces de Telegram (común en spam/scams)
+        telegram_links = features.get('telegram_links', [])
+        if telegram_links:
+            score += min(len(telegram_links) * 15, 30)
+        
+        return min(score, 100)
     
     def _combine_analyses(
         self, 
@@ -321,6 +333,12 @@ class AIAnalyzer:
         
         if features['url_shorteners']:
             indicators.append("URL acortada detectada")
+        
+        if features.get('has_obfuscated_urls', False):
+            indicators.append("⚠️ URL ofuscada detectada (técnica de evasión)")
+        
+        if features.get('telegram_links'):
+            indicators.append(f"Enlace de Telegram: {features['telegram_links'][0]}")
         
         if features['crypto_addresses']:
             indicators.append("Dirección de criptomoneda detectada")

@@ -16,9 +16,37 @@ logger = logging.getLogger(__name__)
 # Validación de URLs
 # ==================
 
+def normalize_obfuscated_text(text: str) -> str:
+    """
+    Normaliza texto eliminando espacios en patrones comunes de URLs ofuscadas.
+    
+    Ejemplos:
+        't . me / +abc' -> 't.me/+abc'
+        'telegram . me / grupo' -> 'telegram.me/grupo'
+    """
+    normalized = text
+    
+    # Patrones de dominios comunes que se ofuscan con espacios
+    obfuscation_patterns = [
+        # Telegram
+        (r't\s*\.\s*me\s*/\s*', 't.me/'),
+        (r'telegram\s*\.\s*me\s*/\s*', 'telegram.me/'),
+        (r'telegram\s*\.\s*org\s*/\s*', 'telegram.org/'),
+        # Otros dominios comunes
+        (r'bit\s*\.\s*ly\s*/\s*', 'bit.ly/'),
+        (r'wa\s*\.\s*me\s*/\s*', 'wa.me/'),
+        (r'discord\s*\.\s*gg\s*/\s*', 'discord.gg/'),
+    ]
+    
+    for pattern, replacement in obfuscation_patterns:
+        normalized = re.sub(pattern, replacement, normalized, flags=re.IGNORECASE)
+    
+    return normalized
+
+
 def extract_urls(text: str) -> List[str]:
     """
-    Extrae todas las URLs de un texto.
+    Extrae todas las URLs de un texto, incluyendo URLs ofuscadas.
     
     Args:
         text: Texto del que extraer URLs
@@ -26,16 +54,79 @@ def extract_urls(text: str) -> List[str]:
     Returns:
         Lista de URLs encontradas
     """
-    # Patrón para detectar URLs
-    url_pattern = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-    urls = re.findall(url_pattern, text)
+    # Primero normalizar texto para detectar URLs ofuscadas
+    normalized_text = normalize_obfuscated_text(text)
     
-    # También buscar URLs sin protocolo
+    # Patrón para detectar URLs con protocolo
+    url_pattern = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+    urls = re.findall(url_pattern, normalized_text)
+    
+    # También buscar URLs sin protocolo (www.)
     no_protocol_pattern = r'www\.(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-    urls_no_protocol = re.findall(no_protocol_pattern, text)
+    urls_no_protocol = re.findall(no_protocol_pattern, normalized_text)
     urls.extend(['http://' + url for url in urls_no_protocol])
     
+    # Buscar enlaces de Telegram (t.me, telegram.me)
+    telegram_urls = extract_telegram_links(normalized_text)
+    urls.extend(telegram_urls)
+    
     return list(set(urls))  # Eliminar duplicados
+
+
+def extract_telegram_links(text: str) -> List[str]:
+    """
+    Extrae específicamente enlaces de Telegram del texto.
+    Detecta formatos como: t.me/grupo, telegram.me/+invite, etc.
+    
+    Args:
+        text: Texto del que extraer enlaces
+    
+    Returns:
+        Lista de enlaces de Telegram encontrados
+    """
+    # Normalizar primero para capturar versiones ofuscadas
+    normalized = normalize_obfuscated_text(text)
+    
+    # Patrones para enlaces de Telegram
+    telegram_patterns = [
+        r't\.me/[+]?[a-zA-Z0-9_-]+',
+        r'telegram\.me/[+]?[a-zA-Z0-9_-]+',
+        r'telegram\.org/[+]?[a-zA-Z0-9_-]+',
+    ]
+    
+    links = []
+    for pattern in telegram_patterns:
+        matches = re.findall(pattern, normalized, re.IGNORECASE)
+        links.extend(['https://' + m if not m.startswith('http') else m for m in matches])
+    
+    return list(set(links))
+
+
+def has_obfuscated_urls(text: str) -> bool:
+    """
+    Detecta si el texto contiene URLs intencionalmente ofuscadas.
+    
+    Returns:
+        True si hay indicios de ofuscación de URLs
+    """
+    # Patrones de ofuscación común
+    obfuscation_indicators = [
+        r't\s+\.\s+me',  # t . me
+        r'telegram\s+\.\s+me',
+        r'bit\s+\.\s+ly',
+        r'wa\s+\.\s+me',
+        r'discord\s+\.\s+gg',
+        r'\[\s*\.\s*\]',  # [.] o [ . ]
+        r'\(\s*\.\s*\)',  # (.) o ( . )
+        r'dot\s+',  # "dot" en lugar de "."
+        r'\s+dot\s+',
+    ]
+    
+    for pattern in obfuscation_indicators:
+        if re.search(pattern, text, re.IGNORECASE):
+            return True
+    
+    return False
 
 
 def is_suspicious_url(url: str) -> bool:
@@ -161,26 +252,46 @@ def count_suspicious_keywords(text: str) -> int:
     suspicious_keywords = [
         # Urgencia
         'urgente', 'inmediato', 'ahora', 'rápido', 'último día',
+        'antes de que', 'solo por hoy', 'últimas horas', 'no te pierdas',
         
         # Premios/Sorteos
         'ganador', 'premio', 'gratis', 'regalo', 'sorteo', 'lotería',
+        'entrada gratis', 'acceso gratis', 'free', 'giveaway',
         
         # Financiero
         'dinero', 'transferencia', 'cuenta', 'banco', 'tarjeta',
         'contraseña', 'clave', 'pin', 'verificar cuenta',
+        'bitcoin', 'crypto', 'inversión', 'ganancias',
         
         # Acciones requeridas
         'confirmar', 'validar', 'actualizar', 'verificar', 'clic aquí',
-        'haz clic', 'pulsa aquí', 'ingresa aquí',
+        'haz clic', 'pulsa aquí', 'ingresa aquí', 'únete', 'unirse',
         
         # Amenazas
         'suspendido', 'bloqueado', 'problema', 'error', 'actividad sospechosa',
+        'borren', 'eliminar', 'cerrar', 
         
         # Ofertas
         'oferta limitada', 'últimas unidades', 'descuento', '100%',
         
         # Credenciales
         'username', 'password', 'user', 'pass', 'login',
+        
+        # Contenido adulto / Scams
+        'pack', 'filtró', 'filtrado', 'privado', 'privados', 'viral',
+        'videos exclusivos', 'fotos exclusivas', 'contenido exclusivo',
+        'famosa', 'famoso', 'tiktoker', 'influencer', 'onlyfans',
+        
+        # Grupos/Canales sospechosos
+        'canal', 'grupo exclusivo', 'invitación', 'link privado',
+        'enlace privado', 'unirse al grupo', 'únete al canal',
+        
+        # Manipulación emocional
+        'no te lo pierdas', 'oportunidad única', 'última oportunidad',
+        'solo para ti', 'elegido', 'seleccionado',
+        
+        # Indicadores de scam
+        '🔥', '💰', '🚀', '👇', '⚠️',  # Emojis frecuentes en scams
     ]
     
     count = sum(1 for keyword in suspicious_keywords if keyword in text_lower)

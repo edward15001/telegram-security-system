@@ -1,0 +1,693 @@
+2026-01-29 14:54:21,212 - __main__ - INFO - ============================================================
+2026-01-29 14:54:21,213 - __main__ - INFO - SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM
+2026-01-29 14:54:21,214 - __main__ - INFO - ============================================================
+2026-01-29 14:54:21,214 - __main__ - INFO - 
+2026-01-29 14:54:21,214 - __main__ - INFO - Inicializando componentes del sistema...
+2026-01-29 14:54:21,214 - __main__ - INFO - 
+2026-01-29 14:54:21,215 - __main__ - INFO - Conectando a MongoDB...
+2026-01-29 14:54:21,215 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 14:54:21,225 - database - INFO - Índices creados exitosamente
+2026-01-29 14:54:21,225 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 14:54:21,225 - __main__ - INFO - MongoDB conectado
+2026-01-29 14:54:21,226 - __main__ - INFO - 
+2026-01-29 14:54:21,226 - __main__ - INFO - Conectando a Ollama...
+2026-01-29 14:54:21,226 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 14:54:21,232 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 14:54:21,232 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 14:54:21,232 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 14:54:21,232 - __main__ - INFO - Ollama conectado
+2026-01-29 14:54:21,233 - __main__ - INFO - 
+2026-01-29 14:54:21,233 - __main__ - INFO - ============================================================
+2026-01-29 14:54:21,233 - __main__ - INFO - TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE
+2026-01-29 14:54:21,233 - __main__ - INFO - ============================================================
+2026-01-29 14:54:21,233 - __main__ - INFO - 
+2026-01-29 14:54:21,234 - __main__ - INFO - Iniciando monitores...
+2026-01-29 14:54:21,234 - __main__ - INFO - 
+2026-01-29 14:54:21,234 - __main__ - INFO - ============================================================
+2026-01-29 14:54:21,234 - __main__ - INFO - SISTEMA EN FUNCIONAMIENTO
+2026-01-29 14:54:21,234 - __main__ - INFO - ============================================================
+2026-01-29 14:54:21,234 - __main__ - INFO - 
+2026-01-29 14:54:21,235 - __main__ - INFO - Presiona Ctrl+C para detener el sistema
+2026-01-29 14:54:21,235 - __main__ - INFO - 
+2026-01-29 14:54:21,235 - __main__ - INFO - Monitor de Red: Iniciando...
+2026-01-29 14:54:21,235 - monitor_red - INFO - Iniciando monitor de red...
+2026-01-29 14:54:21,252 - monitor_red - INFO - Posición inicial: 108382241
+2026-01-29 14:54:21,253 - monitor_red - INFO - Monitor de red iniciado correctamente
+2026-01-29 14:54:21,253 - monitor_red - INFO - Monitoreando: /app/logs/eve.json
+2026-01-29 14:54:21,254 - __main__ - INFO - Monitor de Chat: Iniciando...
+2026-01-29 14:54:21,254 - monitor_chat - INFO - Iniciando monitor de chat...
+2026-01-29 14:54:21,254 - monitor_chat - INFO - Inicializando componentes...
+2026-01-29 14:54:21,254 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 14:54:21,261 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 14:54:21,262 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 14:54:21,262 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 14:54:21,263 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 14:54:21,273 - database - INFO - Índices creados exitosamente
+2026-01-29 14:54:21,274 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 14:54:21,281 - monitor_chat - INFO - Handlers registrados
+2026-01-29 14:54:21,281 - monitor_chat - INFO - Monitor de chat iniciado correctamente
+2026-01-29 14:54:21,569 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 14:54:21,570 - monitor_chat - INFO - Bot de Telegram: @cibersecurityBot
+2026-01-29 14:54:21,670 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 14:54:21,671 - telegram.ext.Application - INFO - Application started
+2026-01-29 14:54:21,773 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/deleteWebhook "HTTP/1.1 200 OK"
+2026-01-29 14:54:26,273 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:54:26,274 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:54:32,116 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:54:42,254 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:54:52,312 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:02,427 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:12,565 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:22,633 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:32,738 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:42,876 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:53,012 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:58,031 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:55:58,033 - ai_analyzer - INFO - Analizando mensaje: 🔥 ¡SE FILTRÓ TODO! 🔥 El pack completo de la famosa...
+2026-01-29 14:56:08,169 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:56:18,307 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:56:28,444 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:56:38,583 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:56:40,694 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 14:56:40,695 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 100%)
+2026-01-29 14:56:41,041 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 400 Bad Request"
+2026-01-29 14:56:41,041 - monitor_chat - ERROR - Error al procesar mensaje: Can't parse entities: can't find end of the entity starting at byte offset 606
+2026-01-29 14:56:41,144 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 14:56:41,840 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:56:48,721 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:56:58,857 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:57:08,171 - __main__ - INFO - 
+Señal recibida: SIGTERM
+2026-01-29 14:57:08,974 - __main__ - INFO - 
+2026-01-29 14:57:08,974 - __main__ - INFO - ============================================================
+2026-01-29 14:57:08,975 - __main__ - INFO - DETENIENDO SISTEMA DE CIBERSEGURIDAD
+2026-01-29 14:57:08,975 - __main__ - INFO - ============================================================
+2026-01-29 14:57:08,975 - __main__ - INFO - Cerrando conexiones...
+2026-01-29 14:57:08,977 - database - INFO - Desconectado de MongoDB
+2026-01-29 14:57:08,977 - __main__ - INFO - MongoDB desconectado
+2026-01-29 14:57:08,978 - __main__ - INFO - 
+2026-01-29 14:57:08,978 - __main__ - INFO - ============================================================
+2026-01-29 14:57:08,978 - __main__ - INFO - SISTEMA DETENIDO CORRECTAMENTE
+2026-01-29 14:57:08,979 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,284 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,285 - __main__ - INFO - SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM
+2026-01-29 14:57:25,285 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,285 - __main__ - INFO - 
+2026-01-29 14:57:25,286 - __main__ - INFO - Inicializando componentes del sistema...
+2026-01-29 14:57:25,286 - __main__ - INFO - 
+2026-01-29 14:57:25,286 - __main__ - INFO - Conectando a MongoDB...
+2026-01-29 14:57:25,287 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 14:57:25,303 - database - INFO - Índices creados exitosamente
+2026-01-29 14:57:25,303 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 14:57:25,303 - __main__ - INFO - MongoDB conectado
+2026-01-29 14:57:25,304 - __main__ - INFO - 
+2026-01-29 14:57:25,304 - __main__ - INFO - Conectando a Ollama...
+2026-01-29 14:57:25,304 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 14:57:25,311 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 14:57:25,312 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 14:57:25,312 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 14:57:25,312 - __main__ - INFO - Ollama conectado
+2026-01-29 14:57:25,312 - __main__ - INFO - 
+2026-01-29 14:57:25,313 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,313 - __main__ - INFO - TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE
+2026-01-29 14:57:25,313 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,313 - __main__ - INFO - 
+2026-01-29 14:57:25,314 - __main__ - INFO - Iniciando monitores...
+2026-01-29 14:57:25,314 - __main__ - INFO - 
+2026-01-29 14:57:25,314 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,314 - __main__ - INFO - SISTEMA EN FUNCIONAMIENTO
+2026-01-29 14:57:25,314 - __main__ - INFO - ============================================================
+2026-01-29 14:57:25,315 - __main__ - INFO - 
+2026-01-29 14:57:25,315 - __main__ - INFO - Presiona Ctrl+C para detener el sistema
+2026-01-29 14:57:25,315 - __main__ - INFO - 
+2026-01-29 14:57:25,315 - __main__ - INFO - Monitor de Red: Iniciando...
+2026-01-29 14:57:25,316 - monitor_red - INFO - Iniciando monitor de red...
+2026-01-29 14:57:25,331 - monitor_red - INFO - Posición inicial: 110166395
+2026-01-29 14:57:25,331 - monitor_red - INFO - Monitor de red iniciado correctamente
+2026-01-29 14:57:25,332 - monitor_red - INFO - Monitoreando: /app/logs/eve.json
+2026-01-29 14:57:25,333 - __main__ - INFO - Monitor de Chat: Iniciando...
+2026-01-29 14:57:25,334 - monitor_chat - INFO - Iniciando monitor de chat...
+2026-01-29 14:57:25,334 - monitor_chat - INFO - Inicializando componentes...
+2026-01-29 14:57:25,334 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 14:57:25,342 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 14:57:25,342 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 14:57:25,343 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 14:57:25,343 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 14:57:25,352 - database - INFO - Índices creados exitosamente
+2026-01-29 14:57:25,352 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 14:57:25,361 - monitor_chat - INFO - Handlers registrados
+2026-01-29 14:57:25,361 - monitor_chat - INFO - Monitor de chat iniciado correctamente
+2026-01-29 14:57:25,687 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 14:57:25,688 - monitor_chat - INFO - Bot de Telegram: @cibersecurityBot
+2026-01-29 14:57:25,762 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 14:57:25,763 - telegram.ext.Application - INFO - Application started
+2026-01-29 14:57:25,855 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/deleteWebhook "HTTP/1.1 200 OK"
+2026-01-29 14:57:30,358 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:57:30,359 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:57:36,133 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:57:46,270 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:57:57,106 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:57:57,235 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:57:57,237 - ai_analyzer - INFO - Analizando mensaje: 🔥 ¡SE FILTRÓ TODO! 🔥 El pack completo de la famosa...
+2026-01-29 14:58:07,365 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:17,510 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:27,640 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:31,682 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 14:58:31,683 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 100%)
+2026-01-29 14:58:32,248 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 14:58:32,402 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 14:58:35,637 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:58:37,780 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:47,837 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:57,952 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:58,568 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:58:58,570 - ai_analyzer - INFO - Analizando mensaje: Tengo acceso a tu sistema operativo. He estado obs...
+2026-01-29 14:59:00,690 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 14:59:00,691 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 95%)
+2026-01-29 14:59:01,025 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 14:59:01,126 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 14:59:05,779 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 14:59:08,704 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:59:18,842 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 14:59:24,845 - __main__ - INFO - 
+Señal recibida: SIGTERM
+2026-01-29 14:59:24,989 - __main__ - INFO - 
+2026-01-29 14:59:24,990 - __main__ - INFO - ============================================================
+2026-01-29 14:59:24,990 - __main__ - INFO - DETENIENDO SISTEMA DE CIBERSEGURIDAD
+2026-01-29 14:59:24,991 - __main__ - INFO - ============================================================
+2026-01-29 14:59:24,991 - __main__ - INFO - Cerrando conexiones...
+2026-01-29 14:59:24,992 - database - INFO - Desconectado de MongoDB
+2026-01-29 14:59:24,993 - __main__ - INFO - MongoDB desconectado
+2026-01-29 14:59:24,993 - __main__ - INFO - 
+2026-01-29 14:59:24,993 - __main__ - INFO - ============================================================
+2026-01-29 14:59:24,993 - __main__ - INFO - SISTEMA DETENIDO CORRECTAMENTE
+2026-01-29 14:59:24,994 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,523 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,524 - __main__ - INFO - SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM
+2026-01-29 15:05:03,524 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,524 - __main__ - INFO - 
+2026-01-29 15:05:03,525 - __main__ - INFO - Inicializando componentes del sistema...
+2026-01-29 15:05:03,525 - __main__ - INFO - 
+2026-01-29 15:05:03,525 - __main__ - INFO - Conectando a MongoDB...
+2026-01-29 15:05:03,525 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:05:03,535 - database - INFO - Índices creados exitosamente
+2026-01-29 15:05:03,535 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:05:03,536 - __main__ - INFO - MongoDB conectado
+2026-01-29 15:05:03,536 - __main__ - INFO - 
+2026-01-29 15:05:03,536 - __main__ - INFO - Conectando a Ollama...
+2026-01-29 15:05:03,536 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:05:03,542 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:05:03,542 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:05:03,543 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:05:03,543 - __main__ - INFO - Ollama conectado
+2026-01-29 15:05:03,543 - __main__ - INFO - 
+2026-01-29 15:05:03,543 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,544 - __main__ - INFO - TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE
+2026-01-29 15:05:03,544 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,544 - __main__ - INFO - 
+2026-01-29 15:05:03,544 - __main__ - INFO - Iniciando monitores...
+2026-01-29 15:05:03,544 - __main__ - INFO - 
+2026-01-29 15:05:03,545 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,545 - __main__ - INFO - SISTEMA EN FUNCIONAMIENTO
+2026-01-29 15:05:03,545 - __main__ - INFO - ============================================================
+2026-01-29 15:05:03,545 - __main__ - INFO - 
+2026-01-29 15:05:03,545 - __main__ - INFO - Presiona Ctrl+C para detener el sistema
+2026-01-29 15:05:03,546 - __main__ - INFO - 
+2026-01-29 15:05:03,546 - __main__ - INFO - Monitor de Red: Iniciando...
+2026-01-29 15:05:03,546 - monitor_red - INFO - Iniciando monitor de red...
+2026-01-29 15:05:03,561 - monitor_red - INFO - Posición inicial: 111835872
+2026-01-29 15:05:03,562 - monitor_red - INFO - Monitor de red iniciado correctamente
+2026-01-29 15:05:03,562 - monitor_red - INFO - Monitoreando: /app/logs/eve.json
+2026-01-29 15:05:03,563 - __main__ - INFO - Monitor de Chat: Iniciando...
+2026-01-29 15:05:03,563 - monitor_chat - INFO - Iniciando monitor de chat...
+2026-01-29 15:05:03,564 - monitor_chat - INFO - Inicializando componentes...
+2026-01-29 15:05:03,564 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:05:03,572 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:05:03,572 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:05:03,572 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:05:03,573 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:05:03,580 - database - INFO - Índices creados exitosamente
+2026-01-29 15:05:03,581 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:05:03,589 - monitor_chat - INFO - Handlers registrados
+2026-01-29 15:05:03,589 - monitor_chat - INFO - Monitor de chat iniciado correctamente
+2026-01-29 15:05:03,937 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:05:03,937 - monitor_chat - INFO - Bot de Telegram: @cibersecurityBot
+2026-01-29 15:05:04,037 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:05:04,038 - telegram.ext.Application - INFO - Application started
+2026-01-29 15:05:04,140 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/deleteWebhook "HTTP/1.1 200 OK"
+2026-01-29 15:05:04,448 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:05:04,449 - ai_analyzer - INFO - Analizando mensaje: Hola mamá/papá, mi teléfono se cayó y la pantalla ...
+2026-01-29 15:05:08,583 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:05:08,583 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:05:14,586 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:05:24,722 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:05:26,976 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:05:37,038 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:05:39,185 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:05:39,186 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:05:39,366 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 400 Bad Request"
+2026-01-29 15:05:39,367 - monitor_chat - ERROR - Error al procesar mensaje: Can't parse entities: can't find end of the entity starting at byte offset 53
+2026-01-29 15:05:39,466 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:05:39,467 - ai_analyzer - INFO - Analizando mensaje: Hola mamá/papá, mi teléfono se cayó y la pantalla ...
+2026-01-29 15:05:41,342 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:05:41,343 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:05:41,399 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 400 Bad Request"
+2026-01-29 15:05:41,400 - monitor_chat - ERROR - Error al procesar mensaje: Can't parse entities: can't find end of the entity starting at byte offset 53
+2026-01-29 15:05:41,488 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:05:43,728 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:05:47,101 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:05:57,158 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:06:00,439 - __main__ - INFO - 
+Señal recibida: SIGTERM
+2026-01-29 15:06:01,206 - __main__ - INFO - 
+2026-01-29 15:06:01,207 - __main__ - INFO - ============================================================
+2026-01-29 15:06:01,208 - __main__ - INFO - DETENIENDO SISTEMA DE CIBERSEGURIDAD
+2026-01-29 15:06:01,208 - __main__ - INFO - ============================================================
+2026-01-29 15:06:01,209 - __main__ - INFO - Cerrando conexiones...
+2026-01-29 15:06:01,210 - database - INFO - Desconectado de MongoDB
+2026-01-29 15:06:01,210 - __main__ - INFO - MongoDB desconectado
+2026-01-29 15:06:01,210 - __main__ - INFO - 
+2026-01-29 15:06:01,211 - __main__ - INFO - ============================================================
+2026-01-29 15:06:01,211 - __main__ - INFO - SISTEMA DETENIDO CORRECTAMENTE
+2026-01-29 15:06:01,211 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,491 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,492 - __main__ - INFO - SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM
+2026-01-29 15:08:26,492 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,492 - __main__ - INFO - 
+2026-01-29 15:08:26,493 - __main__ - INFO - Inicializando componentes del sistema...
+2026-01-29 15:08:26,493 - __main__ - INFO - 
+2026-01-29 15:08:26,493 - __main__ - INFO - Conectando a MongoDB...
+2026-01-29 15:08:26,493 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:08:26,503 - database - INFO - Índices creados exitosamente
+2026-01-29 15:08:26,503 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:08:26,504 - __main__ - INFO - MongoDB conectado
+2026-01-29 15:08:26,504 - __main__ - INFO - 
+2026-01-29 15:08:26,504 - __main__ - INFO - Conectando a Ollama...
+2026-01-29 15:08:26,505 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:08:26,512 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:08:26,513 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:08:26,513 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:08:26,513 - __main__ - INFO - Ollama conectado
+2026-01-29 15:08:26,513 - __main__ - INFO - 
+2026-01-29 15:08:26,514 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,514 - __main__ - INFO - TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE
+2026-01-29 15:08:26,514 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,514 - __main__ - INFO - 
+2026-01-29 15:08:26,514 - __main__ - INFO - Iniciando monitores...
+2026-01-29 15:08:26,515 - __main__ - INFO - 
+2026-01-29 15:08:26,515 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,515 - __main__ - INFO - SISTEMA EN FUNCIONAMIENTO
+2026-01-29 15:08:26,516 - __main__ - INFO - ============================================================
+2026-01-29 15:08:26,516 - __main__ - INFO - 
+2026-01-29 15:08:26,516 - __main__ - INFO - Presiona Ctrl+C para detener el sistema
+2026-01-29 15:08:26,516 - __main__ - INFO - 
+2026-01-29 15:08:26,517 - __main__ - INFO - Monitor de Red: Iniciando...
+2026-01-29 15:08:26,517 - monitor_red - INFO - Iniciando monitor de red...
+2026-01-29 15:08:26,537 - monitor_red - INFO - Posición inicial: 112775779
+2026-01-29 15:08:26,537 - monitor_red - INFO - Monitor de red iniciado correctamente
+2026-01-29 15:08:26,538 - monitor_red - INFO - Monitoreando: /app/logs/eve.json
+2026-01-29 15:08:26,539 - __main__ - INFO - Monitor de Chat: Iniciando...
+2026-01-29 15:08:26,539 - monitor_chat - INFO - Iniciando monitor de chat...
+2026-01-29 15:08:26,539 - monitor_chat - INFO - Inicializando componentes...
+2026-01-29 15:08:26,539 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:08:26,546 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:08:26,547 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:08:26,547 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:08:26,547 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:08:26,556 - database - INFO - Índices creados exitosamente
+2026-01-29 15:08:26,556 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:08:26,563 - monitor_chat - INFO - Handlers registrados
+2026-01-29 15:08:26,564 - monitor_chat - INFO - Monitor de chat iniciado correctamente
+2026-01-29 15:08:26,896 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:08:26,897 - monitor_chat - INFO - Bot de Telegram: @cibersecurityBot
+2026-01-29 15:08:26,998 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:08:26,999 - telegram.ext.Application - INFO - Application started
+2026-01-29 15:08:27,109 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/deleteWebhook "HTTP/1.1 200 OK"
+2026-01-29 15:08:31,561 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:08:31,561 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:08:37,279 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:08:47,374 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:08:57,513 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:09:07,652 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:09:17,742 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:09:27,799 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:09:35,307 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:09:35,308 - ai_analyzer - INFO - Analizando mensaje: Hola mamá/papá, mi teléfono se cayó y la pantalla ...
+2026-01-29 15:09:45,368 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:09:55,424 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:05,481 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:10,126 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:10:10,127 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:10:10,384 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 400 Bad Request"
+2026-01-29 15:10:10,384 - monitor_chat - ERROR - Error al procesar mensaje: Can't parse entities: can't find end of the entity starting at byte offset 49
+2026-01-29 15:10:10,512 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:10:11,992 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:10:15,544 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:25,681 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:33,509 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:33,511 - ai_analyzer - INFO - Analizando mensaje: Hola mamá/papá, mi teléfono se cayó y la pantalla ...
+2026-01-29 15:10:35,822 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:10:35,823 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:10:36,040 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 400 Bad Request"
+2026-01-29 15:10:36,041 - monitor_chat - ERROR - Error al procesar mensaje: Can't parse entities: can't find end of the entity starting at byte offset 49
+2026-01-29 15:10:36,265 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:10:37,095 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:10:43,574 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:53,739 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:10:54,076 - __main__ - INFO - 
+Señal recibida: SIGTERM
+2026-01-29 15:10:54,286 - __main__ - INFO - 
+2026-01-29 15:10:54,287 - __main__ - INFO - ============================================================
+2026-01-29 15:10:54,287 - __main__ - INFO - DETENIENDO SISTEMA DE CIBERSEGURIDAD
+2026-01-29 15:10:54,288 - __main__ - INFO - ============================================================
+2026-01-29 15:10:54,288 - __main__ - INFO - Cerrando conexiones...
+2026-01-29 15:10:54,289 - database - INFO - Desconectado de MongoDB
+2026-01-29 15:10:54,290 - __main__ - INFO - MongoDB desconectado
+2026-01-29 15:10:54,290 - __main__ - INFO - 
+2026-01-29 15:10:54,290 - __main__ - INFO - ============================================================
+2026-01-29 15:10:54,291 - __main__ - INFO - SISTEMA DETENIDO CORRECTAMENTE
+2026-01-29 15:10:54,291 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,873 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,874 - __main__ - INFO - SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM
+2026-01-29 15:11:26,875 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,875 - __main__ - INFO - 
+2026-01-29 15:11:26,875 - __main__ - INFO - Inicializando componentes del sistema...
+2026-01-29 15:11:26,875 - __main__ - INFO - 
+2026-01-29 15:11:26,876 - __main__ - INFO - Conectando a MongoDB...
+2026-01-29 15:11:26,876 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:11:26,886 - database - INFO - Índices creados exitosamente
+2026-01-29 15:11:26,886 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:11:26,886 - __main__ - INFO - MongoDB conectado
+2026-01-29 15:11:26,887 - __main__ - INFO - 
+2026-01-29 15:11:26,887 - __main__ - INFO - Conectando a Ollama...
+2026-01-29 15:11:26,887 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:11:26,893 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:11:26,893 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:11:26,894 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:11:26,894 - __main__ - INFO - Ollama conectado
+2026-01-29 15:11:26,894 - __main__ - INFO - 
+2026-01-29 15:11:26,894 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,895 - __main__ - INFO - TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE
+2026-01-29 15:11:26,895 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,895 - __main__ - INFO - 
+2026-01-29 15:11:26,895 - __main__ - INFO - Iniciando monitores...
+2026-01-29 15:11:26,895 - __main__ - INFO - 
+2026-01-29 15:11:26,896 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,896 - __main__ - INFO - SISTEMA EN FUNCIONAMIENTO
+2026-01-29 15:11:26,896 - __main__ - INFO - ============================================================
+2026-01-29 15:11:26,896 - __main__ - INFO - 
+2026-01-29 15:11:26,897 - __main__ - INFO - Presiona Ctrl+C para detener el sistema
+2026-01-29 15:11:26,897 - __main__ - INFO - 
+2026-01-29 15:11:26,897 - __main__ - INFO - Monitor de Red: Iniciando...
+2026-01-29 15:11:26,897 - monitor_red - INFO - Iniciando monitor de red...
+2026-01-29 15:11:26,913 - monitor_red - INFO - Posición inicial: 114800497
+2026-01-29 15:11:26,914 - monitor_red - INFO - Monitor de red iniciado correctamente
+2026-01-29 15:11:26,914 - monitor_red - INFO - Monitoreando: /app/logs/eve.json
+2026-01-29 15:11:26,915 - __main__ - INFO - Monitor de Chat: Iniciando...
+2026-01-29 15:11:26,915 - monitor_chat - INFO - Iniciando monitor de chat...
+2026-01-29 15:11:26,916 - monitor_chat - INFO - Inicializando componentes...
+2026-01-29 15:11:26,916 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:11:26,923 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:11:26,924 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:11:26,924 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:11:26,924 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:11:26,933 - database - INFO - Índices creados exitosamente
+2026-01-29 15:11:26,933 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:11:26,942 - monitor_chat - INFO - Handlers registrados
+2026-01-29 15:11:26,942 - monitor_chat - INFO - Monitor de chat iniciado correctamente
+2026-01-29 15:11:27,328 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:11:27,329 - monitor_chat - INFO - Bot de Telegram: @cibersecurityBot
+2026-01-29 15:11:27,430 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:11:27,431 - telegram.ext.Application - INFO - Application started
+2026-01-29 15:11:27,532 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/deleteWebhook "HTTP/1.1 200 OK"
+2026-01-29 15:11:31,936 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:11:31,937 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:11:37,773 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:11:47,838 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:11:56,388 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:11:56,389 - ai_analyzer - INFO - Analizando mensaje: Hola mamá/papá, mi teléfono se cayó y la pantalla ...
+2026-01-29 15:12:06,451 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:12:16,514 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:12:26,618 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:12:30,272 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:12:30,273 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:12:30,611 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 400 Bad Request"
+2026-01-29 15:12:30,612 - monitor_chat - ERROR - Error al procesar mensaje: Can't parse entities: can't find end of the entity starting at byte offset 49
+2026-01-29 15:12:30,817 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:12:32,184 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:12:36,757 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:12:46,894 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:12:54,053 - __main__ - INFO - 
+Señal recibida: SIGTERM
+2026-01-29 15:12:54,633 - __main__ - INFO - 
+2026-01-29 15:12:54,633 - __main__ - INFO - ============================================================
+2026-01-29 15:12:54,634 - __main__ - INFO - DETENIENDO SISTEMA DE CIBERSEGURIDAD
+2026-01-29 15:12:54,634 - __main__ - INFO - ============================================================
+2026-01-29 15:12:54,634 - __main__ - INFO - Cerrando conexiones...
+2026-01-29 15:12:54,636 - database - INFO - Desconectado de MongoDB
+2026-01-29 15:12:54,636 - __main__ - INFO - MongoDB desconectado
+2026-01-29 15:12:54,636 - __main__ - INFO - 
+2026-01-29 15:12:54,637 - __main__ - INFO - ============================================================
+2026-01-29 15:12:54,637 - __main__ - INFO - SISTEMA DETENIDO CORRECTAMENTE
+2026-01-29 15:12:54,637 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,098 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,099 - __main__ - INFO - SISTEMA DE CIBERSEGURIDAD INTELIGENTE EN TELEGRAM
+2026-01-29 15:16:19,099 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,099 - __main__ - INFO - 
+2026-01-29 15:16:19,100 - __main__ - INFO - Inicializando componentes del sistema...
+2026-01-29 15:16:19,100 - __main__ - INFO - 
+2026-01-29 15:16:19,100 - __main__ - INFO - Conectando a MongoDB...
+2026-01-29 15:16:19,101 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:16:19,111 - database - INFO - Índices creados exitosamente
+2026-01-29 15:16:19,111 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:16:19,111 - __main__ - INFO - MongoDB conectado
+2026-01-29 15:16:19,111 - __main__ - INFO - 
+2026-01-29 15:16:19,112 - __main__ - INFO - Conectando a Ollama...
+2026-01-29 15:16:19,112 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:16:19,117 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:16:19,118 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:16:19,118 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:16:19,118 - __main__ - INFO - Ollama conectado
+2026-01-29 15:16:19,119 - __main__ - INFO - 
+2026-01-29 15:16:19,119 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,119 - __main__ - INFO - TODOS LOS COMPONENTES INICIALIZADOS CORRECTAMENTE
+2026-01-29 15:16:19,119 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,119 - __main__ - INFO - 
+2026-01-29 15:16:19,120 - __main__ - INFO - Iniciando monitores...
+2026-01-29 15:16:19,120 - __main__ - INFO - 
+2026-01-29 15:16:19,120 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,120 - __main__ - INFO - SISTEMA EN FUNCIONAMIENTO
+2026-01-29 15:16:19,121 - __main__ - INFO - ============================================================
+2026-01-29 15:16:19,121 - __main__ - INFO - 
+2026-01-29 15:16:19,121 - __main__ - INFO - Presiona Ctrl+C para detener el sistema
+2026-01-29 15:16:19,121 - __main__ - INFO - 
+2026-01-29 15:16:19,121 - __main__ - INFO - Monitor de Red: Iniciando...
+2026-01-29 15:16:19,122 - monitor_red - INFO - Iniciando monitor de red...
+2026-01-29 15:16:19,136 - monitor_red - INFO - Posición inicial: 116062759
+2026-01-29 15:16:19,137 - monitor_red - INFO - Monitor de red iniciado correctamente
+2026-01-29 15:16:19,137 - monitor_red - INFO - Monitoreando: /app/logs/eve.json
+2026-01-29 15:16:19,137 - __main__ - INFO - Monitor de Chat: Iniciando...
+2026-01-29 15:16:19,137 - monitor_chat - INFO - Iniciando monitor de chat...
+2026-01-29 15:16:19,138 - monitor_chat - INFO - Inicializando componentes...
+2026-01-29 15:16:19,138 - ai_analyzer - INFO - Conectando a Ollama: http://ollama:11434
+2026-01-29 15:16:19,144 - httpx - INFO - HTTP Request: GET http://ollama:11434/api/tags "HTTP/1.1 200 OK"
+2026-01-29 15:16:19,145 - ai_analyzer - INFO - Modelo mistral:7b-instruct ya está disponible
+2026-01-29 15:16:19,145 - ai_analyzer - INFO - Ollama conectado - Modelo: mistral:7b-instruct
+2026-01-29 15:16:19,145 - database - INFO - 🔌 Conectando a MongoDB: mongodb://mongodb:27017/ciberseguridad
+2026-01-29 15:16:19,154 - database - INFO - Índices creados exitosamente
+2026-01-29 15:16:19,154 - database - INFO - Conectado a MongoDB exitosamente
+2026-01-29 15:16:19,161 - monitor_chat - INFO - Handlers registrados
+2026-01-29 15:16:19,162 - monitor_chat - INFO - Monitor de chat iniciado correctamente
+2026-01-29 15:16:19,446 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:16:19,447 - monitor_chat - INFO - Bot de Telegram: @cibersecurityBot
+2026-01-29 15:16:19,582 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getMe "HTTP/1.1 200 OK"
+2026-01-29 15:16:19,583 - telegram.ext.Application - INFO - Application started
+2026-01-29 15:16:19,643 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/deleteWebhook "HTTP/1.1 200 OK"
+2026-01-29 15:16:24,156 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:16:24,157 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:16:29,850 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:16:39,912 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:16:49,995 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:16:57,677 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:16:57,679 - ai_analyzer - INFO - Analizando mensaje: 2026-01-29 15:11:56,389 - ai_analyzer - INFO - Ana...
+2026-01-29 15:17:07,780 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:17,850 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:27,905 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:34,389 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:17:34,390 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:17:34,660 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:17:34,769 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:17:38,022 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:39,470 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:17:48,132 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:58,298 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:59,495 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:17:59,496 - ai_analyzer - INFO - Analizando mensaje: Hola mamá/papá, mi teléfono se cayó y la pantalla ...
+2026-01-29 15:18:01,302 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:18:01,303 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 90%)
+2026-01-29 15:18:01,779 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:01,890 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:04,579 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:18:09,556 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:17,038 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:17,040 - ai_analyzer - INFO - Analizando mensaje: Hola compañero, vi tu pregunta en el chat principa...
+2026-01-29 15:18:19,057 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:18:19,058 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 80%)
+2026-01-29 15:18:19,273 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:19,371 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:19,647 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:18:27,175 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:33,935 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:33,936 - ai_analyzer - INFO - Analizando mensaje: Hola compañero, vi tu pregunta en el chat principa...
+2026-01-29 15:18:36,037 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:18:36,039 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 80%)
+2026-01-29 15:18:36,289 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:36,399 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:39,728 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:18:44,020 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:45,915 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:45,917 - ai_analyzer - INFO - Analizando mensaje: 🚀 IMPULSA TUS REDES SOCIALES HOY 🚀
+
+📷 Instagram: 1...
+2026-01-29 15:18:48,549 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:18:48,550 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 95%)
+2026-01-29 15:18:48,844 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:48,983 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:49,773 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:18:55,982 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:57,486 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:18:57,488 - ai_analyzer - INFO - Analizando mensaje: ⚽️ ¡PARTIDO ARREGLADO PARA HOY! ⚽️
+
+Liga de Segund...
+2026-01-29 15:18:59,330 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:18:59,331 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 100%)
+2026-01-29 15:18:59,567 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:59,672 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:18:59,817 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:19:07,624 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:19:12,539 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:19:12,540 - ai_analyzer - INFO - Analizando mensaje: 💳 LLEGÓ MATERIAL FRESCO - BIN USA/EU 💳
+
+🟢 CCs Full...
+2026-01-29 15:19:14,848 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:19:14,849 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 95%)
+2026-01-29 15:19:15,407 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:19:15,509 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:19:19,910 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:19:22,677 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:19:32,814 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:19:35,079 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:19:35,080 - ai_analyzer - INFO - Analizando mensaje: 🐛 ¡ERROR DE PRECIO EN AMAZON! 🏃🏻‍♂️💨
+
+Smart TV Sam...
+2026-01-29 15:19:36,982 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:19:36,983 - ai_analyzer - INFO - Análisis completado: PHISHING|SPAM (Confianza: 95%)
+2026-01-29 15:19:37,321 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:19:37,423 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:19:39,998 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:19:45,205 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:19:55,331 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:00,360 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:00,362 - ai_analyzer - INFO - Analizando mensaje: 🔥 ¡SE FILTRÓ TODO! 🔥 El pack completo de la famosa...
+2026-01-29 15:20:02,426 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:20:02,427 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 100%)
+2026-01-29 15:20:02,719 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:20:02,818 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:20:05,113 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:20:10,499 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:20,421 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:20,422 - ai_analyzer - INFO - Analizando mensaje: Hola 👋, perdón por escribirte así de la nada. ¿Me ...
+2026-01-29 15:20:22,307 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:20:22,308 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 95%)
+2026-01-29 15:20:22,787 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:20:22,888 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:20:25,203 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:20:30,479 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:38,250 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:38,251 - ai_analyzer - INFO - Analizando mensaje: 🤖 EXCLUSIVO: Nuestro bot de arbitraje IA está gene...
+2026-01-29 15:20:40,215 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:20:40,216 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 95%)
+2026-01-29 15:20:40,606 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:20:40,759 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:20:45,287 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:20:48,388 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:58,012 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:20:58,014 - ai_analyzer - INFO - Analizando mensaje: 🚀🚀 ¡LA PRÓXIMA GEMAS 1000x ESTÁ AQUÍ! 🚀🚀 No te pie...
+2026-01-29 15:20:59,903 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:20:59,904 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 100%)
+2026-01-29 15:21:00,269 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:00,345 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:21:00,368 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:08,151 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:15,627 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:15,628 - ai_analyzer - INFO - Analizando mensaje: 💳 Venta de tarjetas clonadas, cuentas de PayPal co...
+2026-01-29 15:21:19,040 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:21:19,041 - ai_analyzer - INFO - Análisis completado: PHISHING|SPAM (Confianza: 95%)
+2026-01-29 15:21:19,424 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:19,525 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:20,434 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:21:25,763 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:29,348 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:29,350 - ai_analyzer - INFO - Analizando mensaje: Hola, soy el Director General. Estoy en una reunió...
+2026-01-29 15:21:31,563 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:21:31,564 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 95%)
+2026-01-29 15:21:31,908 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:32,010 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:35,504 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:21:39,406 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:43,480 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:43,482 - ai_analyzer - INFO - Analizando mensaje: Hola, perdón por molestar. Encontré tu número en m...
+2026-01-29 15:21:45,468 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:21:45,469 - ai_analyzer - INFO - Análisis completado: SOCIAL_ENGINEERING (Confianza: 80%)
+2026-01-29 15:21:45,836 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:45,937 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:50,570 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:21:53,618 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:56,093 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:21:56,094 - ai_analyzer - INFO - Analizando mensaje: ¡Felicidades! Tu perfil ha sido seleccionado por n...
+2026-01-29 15:21:57,780 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:21:57,781 - ai_analyzer - INFO - Análisis completado: SPAM (Confianza: 95%)
+2026-01-29 15:21:58,122 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:21:58,224 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:00,615 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:22:06,212 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:16,309 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:16,965 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:16,967 - ai_analyzer - INFO - Analizando mensaje: ⚠️ ALERTA DE SEGURIDAD: Hemos detectado un inicio ...
+2026-01-29 15:22:19,169 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:22:19,170 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 100%)
+2026-01-29 15:22:19,628 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:19,730 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:20,708 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:22:27,102 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:27,819 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:27,821 - ai_analyzer - INFO - Analizando mensaje: Hola, tu envío #GT-4921 está retenido en aduanas p...
+2026-01-29 15:22:29,918 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:22:29,920 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 100%)
+2026-01-29 15:22:30,277 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:30,380 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:30,753 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:22:37,966 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:38,021 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:38,023 - ai_analyzer - INFO - Analizando mensaje: Estimado cliente, su tarjeta asociada ha sido desa...
+2026-01-29 15:22:40,462 - httpx - INFO - HTTP Request: POST http://ollama:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-29 15:22:40,463 - ai_analyzer - INFO - Análisis completado: PHISHING (Confianza: 100%)
+2026-01-29 15:22:40,796 - monitor_red - INFO - TLS Connection a Telegram: api.telegram.org
+2026-01-29 15:22:40,825 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:40,928 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/sendMessage "HTTP/1.1 200 OK"
+2026-01-29 15:22:48,080 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:22:58,232 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:23:08,370 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7646078215:TOKEN_ELIMINADO_HISTORIAL/getUpdates "HTTP/1.1 200 OK"
+2026-01-29 15:23:08,378 - __main__ - INFO - 
+Señal recibida: SIGTERM
+2026-01-29 15:23:08,917 - __main__ - INFO - 
+2026-01-29 15:23:08,918 - __main__ - INFO - ============================================================
+2026-01-29 15:23:08,918 - __main__ - INFO - DETENIENDO SISTEMA DE CIBERSEGURIDAD
+2026-01-29 15:23:08,919 - __main__ - INFO - ============================================================
+2026-01-29 15:23:08,919 - __main__ - INFO - Cerrando conexiones...
+2026-01-29 15:23:08,920 - database - INFO - Desconectado de MongoDB
+2026-01-29 15:23:08,921 - __main__ - INFO - MongoDB desconectado
+2026-01-29 15:23:08,921 - __main__ - INFO - 
+2026-01-29 15:23:08,921 - __main__ - INFO - ============================================================
+2026-01-29 15:23:08,922 - __main__ - INFO - SISTEMA DETENIDO CORRECTAMENTE
+2026-01-29 15:23:08,922 - __main__ - INFO - ============================================================
