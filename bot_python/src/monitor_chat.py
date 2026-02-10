@@ -81,9 +81,13 @@ class MonitorChat:
         self.app.add_handler(CommandHandler("analizar", self.cmd_analizar))
         self.app.add_handler(CommandHandler("recientes", self.cmd_recientes))
         
-        # Mensajes de texto
+        # Mensajes de texto - Escuchar en chats privados Y grupos
         self.app.add_handler(
-            MessageHandler(filters.TEXT & ~filters.COMMAND, self.procesar_mensaje)
+            MessageHandler(
+                (filters.TEXT & ~filters.COMMAND) & 
+                (filters.ChatType.PRIVATE | filters.ChatType.GROUPS | filters.ChatType.SUPERGROUP),
+                self.procesar_mensaje
+            )
         )
         
         logger.info("Handlers registrados")

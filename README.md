@@ -180,6 +180,70 @@ Esto probará la detección de:
 - Ingeniería social
 - Mensajes seguros
 
+## Probar el Sistema de Detección
+
+Para verificar que el bot detector funciona correctamente, envía mensajes de prueba manualmente en el grupo.
+
+### Ejemplos de Mensajes para Probar
+
+#### SPAM
+```
+🎉 ¡FELICIDADES! Has ganado un iPhone 15 Pro Max GRATIS!
+💰 GANA DINERO FÁCIL desde casa! $5000 al día!
+📢 OFERTA LIMITADA: 90% de descuento en productos Apple!
+```
+
+#### PHISHING
+```
+⚠️ ALERTA BANCARIA: Tu cuenta ha sido suspendida. Verifica aquí: bit.ly/banco
+🔐 SEGURIDAD TELEGRAM: Inicia sesión nuevamente: t.me/seguridad
+🏦 BBVA: Confirme sus datos para evitar el cierre de cuenta
+```
+
+#### INGENIERÍA SOCIAL
+```
+👮 POLICÍA NACIONAL: Tiene una multa pendiente de 300€
+😢 Hola, soy tu primo Carlos, tuve un accidente y necesito dinero urgente
+📞 Soporte técnico Microsoft: Su PC tiene un virus, llame al +34-XXX
+```
+
+### Verificar la Detección
+
+Cuando envíes un mensaje de prueba en el grupo, el bot detector:
+
+1. **Recibirá el mensaje** automáticamente
+2. **Lo analizará** con IA (usando Ollama + Mistral)
+3. **Clasificará** el mensaje (SPAM, PHISHING, SOCIAL_ENGINEERING, o SAFE)
+4. **Responderá** con un análisis detallado:
+   ```
+   🎣 Análisis Completado
+
+   Categoría: PHISHING
+   Confianza: 95%
+   Score de Riesgo: 87/100
+
+   Análisis:
+   Mensaje sospechoso que intenta obtener credenciales...
+
+   Indicadores Detectados:
+   • URL acortada sospechosa
+   • Urgencia artificial
+   • Solicitud de datos sensibles
+
+   Recomendación: Procede con precaución.
+   ```
+5. **Almacenará** el resultado en MongoDB
+
+### Comandos Útiles para Testing
+
+En el grupo, envía:
+
+- `/stats` - Ver estadísticas de detección
+- `/alertas 10` - Ver últimas 10 amenazas detectadas
+- `/estado` - Ver estado del sistema
+- `/recientes` - Ver mensajes recientes analizados
+
+
 ## Monitoreo
 
 ### Ver Estado del Sistema
@@ -329,21 +393,6 @@ docker-compose logs mongodb
 # Reiniciar MongoDB
 docker-compose restart mongodb
 ```
-
-## Documentación Adicional
-
-- [Plan de Implementación](../.gemini/antigravity/brain/*/implementation_plan.md)
-- [Tareas del Proyecto](../.gemini/antigravity/brain/*/task.md)
-
-## Contribuciones
-
-Este es un proyecto de TFG (Trabajo Fin de Grado). Las contribuciones son bienvenidas:
-
-1. Fork el proyecto
-2. Crea una branch (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Push a la branch (`git push origin feature/nueva-funcionalidad`)
-5. Crea un Pull Request
 
 ## Licencia
 
