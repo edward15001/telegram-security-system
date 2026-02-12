@@ -295,12 +295,12 @@ class AIAnalyzer:
         
         # Penalizar fuertemente las URLs ofuscadas (técnica de evasión)
         if features.get('has_obfuscated_urls', False):
-            score += 25
+            score += 35
         
         # Añadir riesgo por enlaces de Telegram (común en spam/scams)
         telegram_links = features.get('telegram_links', [])
         if telegram_links:
-            score += min(len(telegram_links) * 15, 30)
+            score += min(len(telegram_links) * 20, 45)
         
         return min(score, 100)
     
@@ -316,14 +316,20 @@ class AIAnalyzer:
         ai_category = ai_analysis.get('category', 'UNKNOWN')
         ai_confidence = ai_analysis.get('confidence', 50)
         
-        # Si la IA dice que es seguro pero el score heurístico es alto, ajustar
-        if ai_category == 'SAFE' and heuristic_score > 60:
-            # Reducir confianza
-            ai_confidence = max(40, 100 - heuristic_score)
+        # --- Calibración de confianza ---
         
-        # Si la IA detecta amenaza, incrementar confianza con evidencia heurística
-        if ai_category != 'SAFE' and heuristic_score > 50:
-            ai_confidence = min(100, ai_confidence + (heuristic_score // 5))
+        # Si la IA dice que es seguro pero el score heurístico es moderado-alto, reducir confianza
+        if ai_category == 'SAFE' and heuristic_score > 40:
+            ai_confidence = max(35, 100 - heuristic_score)
+        
+        # Si la IA detecta amenaza:
+        if ai_category != 'SAFE':
+            if heuristic_score > 50:
+                # Evidencia heurística respalda la amenaza: incremento moderado
+                ai_confidence = min(95, ai_confidence + (heuristic_score // 10))
+            elif heuristic_score < 30:
+                # Poca evidencia heurística: reducir confianza (la IA puede estar sobreestimando)
+                ai_confidence = max(40, ai_confidence - 15)
         
         # Compilar indicadores
         indicators = list(ai_analysis.get('indicators', []))
@@ -349,13 +355,27 @@ class AIAnalyzer:
         if features['excessive_caps']:
             indicators.append("Uso excesivo de mayúsculas")
         
+        # --- Calcular puntuación de riesgo combinada ---
+        # La puntuación de riesgo combina la evidencia heurística con la opinión de la IA
+        # para que ambas métricas sean coherentes entre sí.
+        if ai_category != 'SAFE':
+            # Para amenazas: combinar heurísticas (40%) + confianza IA (60%)
+            ai_risk_component = ai_confidence  # Si la IA está 95% segura de amenaza → alto riesgo
+            combined_risk = int(heuristic_score * 0.4 + ai_risk_component * 0.6)
+        else:
+            # Para mensajes seguros: el riesgo es inversamente proporcional a la confianza
+            ai_risk_component = max(0, 100 - ai_confidence)
+            combined_risk = int(heuristic_score * 0.6 + ai_risk_component * 0.4)
+        
+        combined_risk = min(combined_risk, 100)
+        
         # Crear resultado final
         result = {
             "category": ai_category,
             "confidence": int(ai_confidence),
             "reasoning": ai_analysis.get('reasoning', 'Sin análisis disponible'),
             "indicators": indicators,
-            "risk_score": heuristic_score,
+            "risk_score": combined_risk,
             "metadata": {
                 "ai_model": self.model,
                 "features": features,

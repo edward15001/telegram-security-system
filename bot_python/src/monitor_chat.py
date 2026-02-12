@@ -23,6 +23,15 @@ logger = logging.getLogger(__name__)
 class MonitorChat:
     """Clase para gestionar el bot de Telegram y la integración con IA."""
     
+    # Traducción de categorías internas a español para mostrar al usuario
+    CATEGORY_LABELS_ES = {
+        "PHISHING": "Phishing (Suplantación)",
+        "SPAM": "Spam",
+        "SOCIAL_ENGINEERING": "Ingeniería Social",
+        "SAFE": "Seguro",
+        "UNKNOWN": "Desconocido"
+    }
+    
     def __init__(self):
         self.telegram_token = Config.TELEGRAM_BOT_TOKEN
         self.app: Optional[Application] = None
@@ -178,13 +187,14 @@ SAFE - Mensaje seguro
             
             for i, threat in enumerate(threats, 1):
                 categoria = threat.get('category', 'UNKNOWN')
+                categoria_es = self.CATEGORY_LABELS_ES.get(categoria, categoria)
                 confianza = threat.get('confidence', 0)
                 texto = truncate_text(threat.get('text', 'N/A'), 80)
                 timestamp = threat.get('timestamp', datetime.utcnow())
                 
                 emoji = {"PHISHING": "🎣", "SPAM": "📧", "SOCIAL_ENGINEERING": "🎭"}.get(categoria, "⚠️")
                 
-                mensaje += f"{i}. {emoji} **{categoria}** ({confianza}%)\n"
+                mensaje += f"{i}. {emoji} **{categoria_es}** (Certeza: {confianza}%)\n"
                 mensaje += f"   _{get_time_ago(timestamp)}_\n"
                 mensaje += f"   `{texto}`\n\n"
             
@@ -240,8 +250,9 @@ Mensajes seguros: {self.stats['safe_messages']}
             for category in ['PHISHING', 'SPAM', 'SOCIAL_ENGINEERING', 'SAFE']:
                 count = stats.get(category, 0)
                 percentage = (count / total * 100) if total > 0 else 0
+                category_es = self.CATEGORY_LABELS_ES.get(category, category)
                 emoji = {"PHISHING": "🎣", "SPAM": "📧", "SOCIAL_ENGINEERING": "🎭", "SAFE": "✅"}.get(category, "📁")
-                mensaje += f"{emoji} **{category}:** {count} ({percentage:.1f}%)\n"
+                mensaje += f"{emoji} **{category_es}:** {count} ({percentage:.1f}%)\n"
             
             await update.message.reply_text(mensaje, parse_mode='Markdown')
             
@@ -290,12 +301,13 @@ Mensajes seguros: {self.stats['safe_messages']}
             
             for i, msg in enumerate(messages, 1):
                 categoria = msg.get('category', 'UNKNOWN')
+                categoria_es = self.CATEGORY_LABELS_ES.get(categoria, categoria)
                 texto = truncate_text(msg.get('text', 'N/A'), 60)
                 timestamp = msg.get('timestamp', datetime.utcnow())
                 
                 emoji = {"PHISHING": "🎣", "SPAM": "📧", "SOCIAL_ENGINEERING": "🎭", "SAFE": "✅"}.get(categoria, "📁")
                 
-                mensaje += f"{i}. {emoji} `{texto}`\n"
+                mensaje += f"{i}. {emoji} [{categoria_es}] `{texto}`\n"
                 mensaje += f"   _{get_time_ago(timestamp)}_\n\n"
             
             await update.message.reply_text(mensaje, parse_mode='Markdown')
@@ -347,9 +359,10 @@ Mensajes seguros: {self.stats['safe_messages']}
             
             # Si es una amenaza severa, enviar alerta adicional
             if resultado['category'] != 'SAFE' and resultado['confidence'] >= Config.THREAT_THRESHOLD:
+                categoria_es = self.CATEGORY_LABELS_ES.get(resultado['category'], resultado['category'])
                 alerta = f"<b>⚠️ ALERTA DE SEGURIDAD</b>\n\n"
-                alerta += f"Se detectó una amenaza de tipo <b>{resultado['category']}</b> "
-                alerta += f"con {resultado['confidence']}% de confianza.\n\n"
+                alerta += f"Se detectó una amenaza de tipo <b>{categoria_es}</b> "
+                alerta += f"con {resultado['confidence']}% de certeza.\n\n"
                 alerta += "<b>Recomendación:</b> No interactúes con este mensaje."
                 
                 await update.message.reply_text(alerta, parse_mode='HTML')
@@ -361,6 +374,7 @@ Mensajes seguros: {self.stats['safe_messages']}
     def _formatear_respuesta(self, resultado: dict) -> str:
         """Formatea el resultado del análisis para mostrar al usuario (HTML)."""
         categoria = resultado['category']
+        categoria_es = self.CATEGORY_LABELS_ES.get(categoria, categoria)
         confianza = resultado['confidence']
         razon = self._escape_html(resultado['reasoning'])
         indicadores = resultado['indicators']
@@ -376,11 +390,11 @@ Mensajes seguros: {self.stats['safe_messages']}
         }
         emoji = emoji_map.get(categoria, "⚠️")
         
-        # Construir mensaje en HTML
+        # Construir mensaje en HTML (completamente en español)
         mensaje = f"{emoji} <b>Análisis Completado</b>\n\n"
-        mensaje += f"<b>Categoría:</b> {categoria}\n"
-        mensaje += f"<b>Confianza:</b> {confianza}%\n"
-        mensaje += f"<b>Score de Riesgo:</b> {risk_score}/100\n\n"
+        mensaje += f"<b>Categoría:</b> {categoria_es}\n"
+        mensaje += f"<b>Certeza del análisis:</b> {confianza}%\n"
+        mensaje += f"<b>Nivel de peligrosidad:</b> {risk_score}/100\n\n"
         mensaje += f"<b>Análisis:</b>\n{razon}\n"
         
         if indicadores:

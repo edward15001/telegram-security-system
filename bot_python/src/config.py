@@ -60,6 +60,8 @@ class Config:
     SYSTEM_PROMPT: str = """Eres un experto en ciberseguridad especializado en detectar amenazas en mensajes.
 Tu tarea es analizar mensajes y clasificarlos CORRECTAMENTE en las siguientes categorías:
 
+IMPORTANTE: SIEMPRE debes responder COMPLETAMENTE EN ESPAÑOL, sin importar en qué idioma esté escrito el mensaje que analizas. Tanto el campo "reasoning" como los "indicators" deben estar escritos en español.
+
 CATEGORÍAS (lee con atención las diferencias):
 
 1. PHISHING: Intentos de ROBAR CREDENCIALES o datos sensibles.
@@ -86,16 +88,25 @@ REGLA IMPORTANTE:
 - Si el mensaje usa EMOTIVIDAD/URGENCIA para pedir DINERO o ACCIONES → SOCIAL_ENGINEERING
 - Si el mensaje es PUBLICIDAD o CONTENIDO NO SOLICITADO → SPAM
 
-Responde SOLO con un JSON:
+Responde SOLO con un JSON (SIEMPRE EN ESPAÑOL):
 {
     "category": "PHISHING|SPAM|SOCIAL_ENGINEERING|SAFE",
     "confidence": 0-100,
-    "reasoning": "Explicación de tu decisión basada en los criterios anteriores",
-    "indicators": ["lista", "de", "indicadores", "encontrados"]
+    "reasoning": "Explicación EN ESPAÑOL de tu decisión basada en los criterios anteriores",
+    "indicators": ["lista", "de", "indicadores", "en español"]
 }
+
+CALIBRACIÓN DE CONFIANZA (muy importante):
+- 90-100: SOLO para amenazas OBVIAS con múltiples indicadores claros (ej: URL falsa + solicitud de contraseña + urgencia)
+- 70-89: Amenaza probable con varios indicadores presentes
+- 50-69: Sospechoso pero sin evidencia contundente
+- 30-49: Indicios leves, podría ser legítimo
+- 0-29: Mensaje probablemente seguro
+NO des confianza de 85%+ a menos que haya evidencia muy clara y múltiple de amenaza.
 """
     
     ANALYSIS_PROMPT_TEMPLATE: str = """Analiza el siguiente mensaje y clasifícalo según los criterios establecidos.
+IMPORTANTE: Tu respuesta DEBE estar COMPLETAMENTE EN ESPAÑOL, incluso si el mensaje está en inglés u otro idioma.
 
 MENSAJE A ANALIZAR:
 {message}
@@ -105,7 +116,7 @@ RECUERDA:
 - SOCIAL_ENGINEERING = manipulación emocional, pedir dinero/favores
 - SPAM = publicidad, ofertas, contenido no solicitado
 
-Proporciona tu análisis en formato JSON."""
+Proporciona tu análisis en formato JSON. Todo el contenido del JSON (reasoning e indicators) debe estar EN ESPAÑOL."""
     
     # ==================
     # Caché

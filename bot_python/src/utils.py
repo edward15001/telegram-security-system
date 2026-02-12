@@ -382,9 +382,19 @@ def format_threat_message(category: str, confidence: int, reasoning: str, indica
         "SAFE": "✅"
     }
     
-    emoji = emoji_map.get(category, "⚠️")
+    # Traducción de categorías a español
+    category_labels_es = {
+        "PHISHING": "Phishing (Suplantación)",
+        "SPAM": "Spam",
+        "SOCIAL_ENGINEERING": "Ingeniería Social",
+        "SAFE": "Seguro",
+        "UNKNOWN": "Desconocido"
+    }
     
-    message = f"{emoji} **{category}** (Confianza: {confidence}%)\n\n"
+    emoji = emoji_map.get(category, "⚠️")
+    category_es = category_labels_es.get(category, category)
+    
+    message = f"{emoji} **{category_es}** (Certeza del análisis: {confidence}%)\n\n"
     message += f"**Análisis:** {reasoning}\n\n"
     
     if indicators:
@@ -464,33 +474,43 @@ def calculate_risk_score(
 ) -> int:
     """
     Calcula un score de riesgo basándose en varios indicadores.
+    Los pesos están calibrados para reflejar de forma realista el nivel
+    de peligrosidad del mensaje.
     
     Returns:
         Score de 0-100
     """
     score = 0
     
-    # URLs
+    # Puntuación base si hay algún indicador sospechoso
+    any_indicator = (has_urls or suspicious_url_count > 0 or 
+                     suspicious_keyword_count > 0 or has_phone or 
+                     has_email or has_crypto or excessive_caps or excessive_emojis)
+    if any_indicator:
+        score += 10  # Base mínima de riesgo
+    
+    # URLs (presencia de URLs ya implica riesgo moderado)
     if has_urls:
-        score += 10
-    score += suspicious_url_count * 20
+        score += 20
+    # URLs sospechosas son un indicador fuerte
+    score += suspicious_url_count * 30
     
-    # Keywords sospechosas
-    score += min(suspicious_keyword_count * 5, 30)
+    # Keywords sospechosas (cada una suma más, tope más alto)
+    score += min(suspicious_keyword_count * 8, 45)
     
-    # Información de contacto (posible spam)
+    # Información de contacto (posible spam/scam)
     if has_phone:
-        score += 10
-    if has_email:
-        score += 5
-    if has_crypto:
-        score += 25
-    
-    # Formato del mensaje
-    if excessive_caps:
         score += 15
-    if excessive_emojis:
+    if has_email:
         score += 10
+    if has_crypto:
+        score += 35  # Crypto = alta probabilidad de scam
+    
+    # Formato del mensaje (indicadores de spam/phishing)
+    if excessive_caps:
+        score += 20
+    if excessive_emojis:
+        score += 15
     
     # Limitar a 100
     return min(score, 100)
