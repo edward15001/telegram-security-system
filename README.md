@@ -1,6 +1,30 @@
-# Sistema de Ciberseguridad Inteligente en Telegram
+<div align="center">
 
-Sistema completo de detección y clasificación de amenazas en mensajes de Telegram usando análisis de IA local con Ollama, monitoreo de red con Suricata IDS, y almacenamiento en MongoDB. Optimizado para ejecutarse en Raspberry Pi 5.
+# 🛡️ Sistema de Ciberseguridad Inteligente en Telegram
+
+*Trabajo Fin de Grado - Ingeniería de Computadores*
+
+[![Estado: En Desarrollo](https://img.shields.io/badge/Estado-En_Desarrollo-orange)](#)
+[![Hardware: Raspberry Pi 5](https://img.shields.io/badge/Hardware-Raspberry_Pi_5-C51A4A?logo=raspberry-pi&logoColor=white)](#)
+[![Python: 3.11+](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](#)
+[![Docker: Ready](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](#)
+[![AI: Ollama](https://img.shields.io/badge/AI_Local-Ollama-black)](#)
+
+<p align="center">
+  Sistema completo de detección y clasificación de amenazas en mensajes de Telegram usando análisis de IA local, monitoreo de red con Suricata IDS, y almacenamiento en MongoDB. Optimizado para PYMEs y entornos de bajos recursos.
+</p>
+
+</div>
+
+---
+
+## 🎯 El Problema y la Solución
+
+Las pequeñas y medianas empresas a menudo usan Telegram para su comunicación interna, exponiéndose a vectores de ataque sin contar con presupuesto para soluciones corporativas costosas. 
+
+Este sistema actúa como un **vigilante silencioso**: analiza mensajes en tiempo real para detectar intentos de *Phishing*, *Spam* o *Ingeniería Social*, al mismo tiempo que monitorea el tráfico de red de la empresa buscando anomalías, todo ejecutándose localmente de forma privada.
+
+---
 
 ## Descripción
 
