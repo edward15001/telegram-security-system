@@ -10,9 +10,6 @@ pymongo>=4.6.0
 # IA y Análisis
 ollama>=0.1.6
 
-# Monitoreo de archivos
-watchdog>=3.0
-
 # Configuración
 python-dotenv>=1.0
 

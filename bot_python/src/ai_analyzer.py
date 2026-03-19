@@ -4,6 +4,7 @@ Módulo principal para análisis de mensajes usando modelos de IA locales.
 """
 
 import json
+import hashlib
 import logging
 import asyncio
 from typing import Dict, Optional, List, Any
@@ -71,7 +72,7 @@ class AIAnalyzer:
         if not self.cache:
             return None
         
-        cache_key = hash(message)
+        cache_key = hashlib.sha256(message.encode()).hexdigest()
         if cache_key in self.cache:
             cached_data, timestamp = self.cache[cache_key]
             
@@ -90,7 +91,7 @@ class AIAnalyzer:
         if not self.cache:
             return
         
-        cache_key = hash(message)
+        cache_key = hashlib.sha256(message.encode()).hexdigest()
         self.cache[cache_key] = (result, datetime.now())
         
         # Limitar tamaño del caché

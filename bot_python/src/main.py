@@ -93,10 +93,17 @@ class SistemaCiberseguridad:
                 return
             
             self.running = True
-            
+
+            # Conectar alertas de red críticas con el bot de Telegram
+            if Config.TELEGRAM_ALERT_CHAT_ID:
+                monitor_red.alert_callback = monitor_chat.send_network_alert
+                logger.info(f"Alertas de red habilitadas → chat {Config.TELEGRAM_ALERT_CHAT_ID}")
+            else:
+                logger.warning("TELEGRAM_ALERT_CHAT_ID no configurado: las alertas de red no se enviarán por Telegram")
+
             logger.info("Iniciando monitores...")
             logger.info("")
-            
+
             # Crear tareas de monitoreo
             task_red = asyncio.create_task(
                 self._run_monitor_red(),

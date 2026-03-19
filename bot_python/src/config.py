@@ -18,6 +18,8 @@ class Config:
     # Telegram
     # ==================
     TELEGRAM_BOT_TOKEN: str = os.getenv("TELEGRAM_BOT_TOKEN", "")
+    # Chat ID donde se enviarán las alertas críticas de red (tu chat o un grupo de admins)
+    TELEGRAM_ALERT_CHAT_ID: Optional[int] = int(os.getenv("TELEGRAM_ALERT_CHAT_ID", "0")) or None
     
     # ==================
     # MongoDB

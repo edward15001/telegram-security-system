@@ -8,7 +8,7 @@ import os
 import asyncio
 import logging
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 
 from config import Config
 from database import db
@@ -22,10 +22,9 @@ class MonitorRed:
     def __init__(self, logs_path: str = None):
         if logs_path is None:
             logs_path = Config.SURICATA_LOGS_PATH
-        
+
         self.logs_path = logs_path
         self.eve_log_path = os.path.join(logs_path, Config.SURICATA_EVE_JSON)
-        self.observer = None
         self.last_position = 0
         self.alert_count = 0
         self.event_types = {
@@ -35,6 +34,7 @@ class MonitorRed:
             "tls": 0,
             "http": 0
         }
+        self.alert_callback: Optional[Callable] = None
     
     async def iniciar(self):
         """Inicia el monitoreo de logs de Suricata."""
@@ -176,9 +176,10 @@ class MonitorRed:
                 f"{event.get('src_ip')} → {event.get('dest_ip')}"
             )
             
-            # Si es una alerta crítica (severity 1), podríamos notificar por Telegram
-            # Esto se puede implementar más adelante
-            
+            # Notificar por Telegram si es una alerta crítica (severity 1)
+            if alert.get('severity') == 1 and self.alert_callback:
+                await self.alert_callback(alerta_data)
+
         except Exception as e:
             logger.error(f"Error procesando alerta: {e}")
     
@@ -233,15 +234,11 @@ class MonitorRed:
         return {
             "alerts_count": self.alert_count,
             "event_types": self.event_types.copy(),
-            "monitoring": self.observer is not None and self.observer.is_alive() if self.observer else False
         }
-    
+
     def detener(self):
         """Detiene el monitor."""
-        if self.observer:
-            self.observer.stop()
-            self.observer.join()
-            logger.info("Monitor de red detenido")
+        logger.info("Monitor de red detenido")
 
 
 # Instancia global

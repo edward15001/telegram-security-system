@@ -7,8 +7,8 @@ import os
 import re
 import logging
 import asyncio
-from datetime import datetime
-from typing import Optional
+from datetime import datetime, timedelta
+from typing import Optional, Dict, List
 from telegram import Update
 from telegram.ext import Application,CommandHandler, MessageHandler, filters, ContextTypes
 
@@ -32,6 +32,10 @@ class MonitorChat:
         "UNKNOWN": "Desconocido"
     }
     
+    # Rate limiting: máximo 10 análisis por usuario cada 60 segundos
+    RATE_LIMIT_MAX = 10
+    RATE_LIMIT_WINDOW = 60  # segundos
+
     def __init__(self):
         self.telegram_token = Config.TELEGRAM_BOT_TOKEN
         self.app: Optional[Application] = None
@@ -40,6 +44,7 @@ class MonitorChat:
             "threats_detected": 0,
             "safe_messages": 0
         }
+        self._rate_limiter: Dict[int, List[datetime]] = {}
     
     async def iniciar(self):
         """Inicia el bot de Telegram."""
@@ -100,7 +105,46 @@ class MonitorChat:
         )
         
         logger.info("Handlers registrados")
-    
+
+    def _check_rate_limit(self, user_id: int) -> bool:
+        """Devuelve True si el usuario puede hacer una petición, False si ha superado el límite."""
+        now = datetime.utcnow()
+        ventana = now - timedelta(seconds=self.RATE_LIMIT_WINDOW)
+
+        # Limpiar timestamps antiguos
+        timestamps = self._rate_limiter.get(user_id, [])
+        timestamps = [t for t in timestamps if t > ventana]
+
+        if len(timestamps) >= self.RATE_LIMIT_MAX:
+            self._rate_limiter[user_id] = timestamps
+            return False
+
+        timestamps.append(now)
+        self._rate_limiter[user_id] = timestamps
+        return True
+
+    async def send_network_alert(self, alerta_data: dict):
+        """Envía una alerta de red crítica de Suricata al chat de Telegram."""
+        if not self.app:
+            return
+        try:
+            severity_emoji = ["ℹ️", "⚠️", "🚨", "🔥"][min(alerta_data.get('severity', 1) - 1, 3)]
+            mensaje = (
+                f"{severity_emoji} <b>ALERTA DE RED CRÍTICA</b>\n\n"
+                f"<b>Firma:</b> {self._escape_html(alerta_data.get('signature', 'Desconocida'))}\n"
+                f"<b>Categoría:</b> {self._escape_html(alerta_data.get('category', 'Desconocida'))}\n"
+                f"<b>Origen:</b> {alerta_data.get('source_ip', '?')}:{alerta_data.get('source_port', '?')}\n"
+                f"<b>Destino:</b> {alerta_data.get('dest_ip', '?')}:{alerta_data.get('dest_port', '?')}\n"
+                f"<b>Protocolo:</b> {alerta_data.get('protocol', '?')}"
+            )
+            await self.app.bot.send_message(
+                chat_id=Config.TELEGRAM_ALERT_CHAT_ID,
+                text=mensaje,
+                parse_mode='HTML'
+            )
+        except Exception as e:
+            logger.error(f"Error enviando alerta de red a Telegram: {e}")
+
     # ==================
     # Comandos del Bot
     # ==================
@@ -265,7 +309,14 @@ Mensajes seguros: {self.stats['safe_messages']}
         if not context.args:
             await update.message.reply_text("Uso: /analizar <mensaje a analizar>")
             return
-        
+
+        if not self._check_rate_limit(update.effective_user.id):
+            await update.message.reply_text(
+                f"⏳ Has superado el límite de {self.RATE_LIMIT_MAX} análisis "
+                f"por minuto. Espera un momento."
+            )
+            return
+
         mensaje_analizar = " ".join(context.args)
         await update.message.reply_text("Analizando mensaje...")
         
@@ -322,6 +373,12 @@ Mensajes seguros: {self.stats['safe_messages']}
     
     async def procesar_mensaje(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Procesa mensajes de texto automáticamente."""
+        if not self._check_rate_limit(update.effective_user.id):
+            await update.message.reply_text(
+                f"⏳ Has superado el límite de {self.RATE_LIMIT_MAX} análisis "
+                f"por minuto. Espera un momento."
+            )
+            return
         mensaje = update.message.text
         await self._analizar_y_responder(update, mensaje)
     
