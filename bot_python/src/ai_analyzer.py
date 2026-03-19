@@ -192,27 +192,30 @@ class AIAnalyzer:
             if features['suspicious_keyword_count'] > 0:
                 prompt += f"\nPalabras clave sospechosas encontradas: {features['suspicious_keyword_count']}"
             
-            # Llamar a Ollama
-            response = await asyncio.to_thread(
-                self.client.chat,
-                model=self.model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": Config.SYSTEM_PROMPT
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt
+            # Llamar a Ollama con timeout para no bloquear el bot indefinidamente
+            response = await asyncio.wait_for(
+                asyncio.to_thread(
+                    self.client.chat,
+                    model=self.model,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": Config.SYSTEM_PROMPT
+                        },
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ],
+                    options={
+                        "temperature": 0.3,
+                        "num_predict": 300,  # Reducido para respuestas más rápidas en ARM
+                        "num_thread": 2,     # Limitar a 2 threads para no congelar el sistema
                     }
-                ],
-                options={
-                    "temperature": 0.3,  # Baja temperatura para respuestas más consistentes
-                    "num_predict": 500,
-                    "num_thread": 2,     # Limitar a 2 threads para no congelar el sistema
-                }
+                ),
+                timeout=Config.OLLAMA_TIMEOUT
             )
-            
+
             # Parsear respuesta
             content = response['message']['content']
             

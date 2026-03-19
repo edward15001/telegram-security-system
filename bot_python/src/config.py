@@ -32,7 +32,7 @@ class Config:
     # ==================
     OLLAMA_HOST: str = os.getenv("OLLAMA_HOST", "http://ollama:11434")
     OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "mistral:7b-instruct")
-    OLLAMA_TIMEOUT: int = 60  # Timeout en segundos
+    OLLAMA_TIMEOUT: int = 180  # Timeout en segundos (aumentado para Raspberry Pi)
     
     # ==================
     # Logging
