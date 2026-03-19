@@ -90,16 +90,18 @@ class MonitorRed:
         try:
             if not os.path.exists(self.eve_log_path):
                 return
-            
+
+            # Detectar rotación de log: si el archivo es más pequeño que
+            # la última posición leída, Suricata ha creado un nuevo archivo
+            current_size = os.path.getsize(self.eve_log_path)
+            if current_size < self.last_position:
+                logger.info("Rotación de eve.json detectada, reiniciando posición")
+                self.last_position = 0
+
             # Leer archivo desde la última posición
             with open(self.eve_log_path, 'r', encoding='utf-8', errors='ignore') as f:
-                # Ir a la última posición leída
                 f.seek(self.last_position)
-                
-                # Leer nuevas líneas
                 new_lines = f.readlines()
-                
-                # Actualizar posición
                 self.last_position = f.tell()
             
             # Procesar cada línea (cada línea es un JSON)

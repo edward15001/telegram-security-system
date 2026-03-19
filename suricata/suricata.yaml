@@ -38,6 +38,8 @@ outputs:
       enabled: yes
       filetype: regular
       filename: eve.json
+      rotate-interval: day    # Rotar cada día (crea eve.json.1, eve.json.2...)
+      limit: 100mb            # Rotar también si supera 100 MB
       
       # Tipos de eventos a registrar
       types:

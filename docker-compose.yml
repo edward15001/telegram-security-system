@@ -15,6 +15,11 @@ services:
     restart: unless-stopped
     mem_limit: 2g
     cpus: 2.0
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
 
   # MongoDB - Base de datos para almacenar amenazas detectadas
   mongodb:
@@ -36,6 +41,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - ciberseg_network
 
@@ -58,6 +68,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     deploy:
       resources:
         reservations:
@@ -82,6 +97,7 @@ services:
       - ./logs:/app/logs
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-0}
       - MONGO_URI=mongodb://mongodb:27017/ciberseguridad
       - OLLAMA_HOST=http://ollama:11434
       - OLLAMA_MODEL=${OLLAMA_MODEL:-mistral:7b-instruct}
@@ -90,6 +106,11 @@ services:
     restart: unless-stopped
     mem_limit: 2g
     cpus: 2.0
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
     networks:
       - ciberseg_network
 
