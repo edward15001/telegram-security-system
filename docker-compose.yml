@@ -1,5 +1,4 @@
 # Docker Compose - Archivo maestro que une todos los servicios
-version: '3.8'
 
 services:
   # Suricata IDS - Análisis de tráfico de red
@@ -57,9 +56,12 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_NUM_PARALLEL=1      # Una inferencia a la vez
+      - OLLAMA_MAX_LOADED_MODELS=1 # Solo un modelo en memoria
     restart: unless-stopped
     mem_limit: 8g
-    cpus: 4.0
+    cpus: 2.0                      # Deja 2 núcleos libres para el sistema
     networks:
       - ciberseg_network
     healthcheck:

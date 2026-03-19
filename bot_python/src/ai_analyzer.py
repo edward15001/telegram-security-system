@@ -209,6 +209,7 @@ class AIAnalyzer:
                 options={
                     "temperature": 0.3,  # Baja temperatura para respuestas más consistentes
                     "num_predict": 500,
+                    "num_thread": 2,     # Limitar a 2 threads para no congelar el sistema
                 }
             )
             
