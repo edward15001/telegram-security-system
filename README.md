@@ -113,7 +113,7 @@ Configura las siguientes variables:
 
 ```bash
 # Token del bot de Telegram (obtener de @BotFather)
-TELEGRAM_BOT_TOKEN=7646078215:TOKEN_ELIMINADO_HISTORIAL
+TELEGRAM_BOT_TOKEN=TU_TOKEN_AQUI
 
 # Configuración de Ollama
 OLLAMA_MODEL=mistral:7b-instruct  # o llama2:13b, phi:latest
