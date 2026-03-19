@@ -73,14 +73,13 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [ gpu ]
-    # Si no tienes GPU, comenta la sección de deploy
+    # deploy:                    # Descomentar solo si tienes GPU NVIDIA
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [ gpu ]
 
     # Bot de Python - Análisis de mensajes de Telegram con IA
   bot_python:
