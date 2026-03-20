@@ -210,7 +210,7 @@ class AIAnalyzer:
                     format="json",
                     options={
                         "temperature": 0.3,
-                        "num_predict": 150,  # JSON de respuesta raramente supera 100 tokens
+                        "num_predict": 200,  # Balance entre velocidad y calidad del JSON
                         "num_thread": 3,     # 3 threads, deja 1 núcleo libre para el sistema
                     }
                 ),
