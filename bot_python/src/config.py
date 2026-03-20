@@ -71,8 +71,7 @@ Responde únicamente con JSON válido en español."""
 
 {message}
 
-Responde con este JSON exacto (sin texto adicional):
-{{"category": "PHISHING|SPAM|SOCIAL_ENGINEERING|SAFE", "confidence": 0-100, "reasoning": "motivo en español", "indicators": ["indicador1"]}}"""
+Devuelve JSON con los campos: category (PHISHING, SPAM, SOCIAL_ENGINEERING o SAFE), confidence (número entre 0 y 100), reasoning (texto en español), indicators (lista de razones en español)."""
     
     # ==================
     # Caché

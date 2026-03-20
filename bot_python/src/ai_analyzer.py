@@ -250,6 +250,9 @@ class AIAnalyzer:
                     # Asegurar que indicators existe
                     if 'indicators' not in result:
                         result['indicators'] = []
+                    # Normalizar confidence si viene como decimal (0.95 → 95)
+                    if isinstance(result['confidence'], float) and result['confidence'] <= 1.0:
+                        result['confidence'] = int(result['confidence'] * 100)
                     return result
             
             # Si no se puede parsear JSON, intentar análisis de texto
