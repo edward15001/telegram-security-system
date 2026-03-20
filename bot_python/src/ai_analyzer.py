@@ -247,19 +247,38 @@ class AIAnalyzer:
                 
                 # Validar estructura
                 if all(key in result for key in ['category', 'confidence', 'reasoning']):
+                    # Normalizar categoría con fuzzy matching (TinyLlama produce typos)
+                    raw_cat = str(result['category']).upper()
+                    if 'PHISH' in raw_cat:
+                        result['category'] = 'PHISHING'
+                    elif 'SOCIAL' in raw_cat or 'ENGINEERING' in raw_cat:
+                        result['category'] = 'SOCIAL_ENGINEERING'
+                    elif 'SPAM' in raw_cat:
+                        result['category'] = 'SPAM'
+                    elif 'SAFE' in raw_cat:
+                        result['category'] = 'SAFE'
+
+                    # Normalizar confidence si viene como decimal (0.95 → 95)
+                    if isinstance(result['confidence'], float) and result['confidence'] <= 1.0:
+                        result['confidence'] = int(result['confidence'] * 100)
+
+                    # Extraer reasoning de list/dict si TinyLlama lo anida
+                    reasoning = result['reasoning']
+                    if isinstance(reasoning, list):
+                        parts = []
+                        for item in reasoning:
+                            parts.append(item.get('text', str(item)) if isinstance(item, dict) else str(item))
+                        result['reasoning'] = ' '.join(parts)
+                    elif isinstance(reasoning, dict):
+                        result['reasoning'] = reasoning.get('text', str(reasoning))
+
                     # Asegurar que indicators existe y es lista de strings
                     if 'indicators' not in result:
                         result['indicators'] = []
                     result['indicators'] = [
-                        str(i) for i in result['indicators']
-                        if not isinstance(i, dict)
+                        item.get('text', str(item)) if isinstance(item, dict) else str(item)
+                        for item in result['indicators']
                     ]
-                    # Normalizar confidence si viene como decimal (0.95 → 95)
-                    if isinstance(result['confidence'], float) and result['confidence'] <= 1.0:
-                        result['confidence'] = int(result['confidence'] * 100)
-                    # Asegurar que reasoning es siempre string
-                    if not isinstance(result['reasoning'], str):
-                        result['reasoning'] = str(result['reasoning'])
                     return result
             
             # Si no se puede parsear JSON, intentar análisis de texto
