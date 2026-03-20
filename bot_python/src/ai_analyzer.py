@@ -207,9 +207,10 @@ class AIAnalyzer:
                             "content": prompt
                         }
                     ],
+                    format="json",
                     options={
                         "temperature": 0.3,
-                        "num_predict": 300,  # Reducido para respuestas más rápidas en ARM
+                        "num_predict": 150,  # JSON de respuesta raramente supera 100 tokens
                         "num_thread": 3,     # 3 threads, deja 1 núcleo libre para el sistema
                     }
                 ),
