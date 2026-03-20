@@ -468,10 +468,12 @@ Mensajes seguros: {self.stats['safe_messages']}
         
         return mensaje
     
-    def _escape_html(self, text: str) -> str:
+    def _escape_html(self, text) -> str:
         """Escapa caracteres especiales de HTML para Telegram."""
         if not text:
             return ""
+        if not isinstance(text, str):
+            text = str(text)
         # Caracteres reservados en HTML
         text = text.replace('&', '&amp;')
         text = text.replace('<', '&lt;')

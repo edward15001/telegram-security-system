@@ -247,12 +247,19 @@ class AIAnalyzer:
                 
                 # Validar estructura
                 if all(key in result for key in ['category', 'confidence', 'reasoning']):
-                    # Asegurar que indicators existe
+                    # Asegurar que indicators existe y es lista de strings
                     if 'indicators' not in result:
                         result['indicators'] = []
+                    result['indicators'] = [
+                        str(i) for i in result['indicators']
+                        if not isinstance(i, dict)
+                    ]
                     # Normalizar confidence si viene como decimal (0.95 → 95)
                     if isinstance(result['confidence'], float) and result['confidence'] <= 1.0:
                         result['confidence'] = int(result['confidence'] * 100)
+                    # Asegurar que reasoning es siempre string
+                    if not isinstance(result['reasoning'], str):
+                        result['reasoning'] = str(result['reasoning'])
                     return result
             
             # Si no se puede parsear JSON, intentar análisis de texto
