@@ -210,7 +210,7 @@ class AIAnalyzer:
                     options={
                         "temperature": 0.3,
                         "num_predict": 300,  # Reducido para respuestas más rápidas en ARM
-                        "num_thread": 2,     # Limitar a 2 threads para no congelar el sistema
+                        "num_thread": 3,     # 3 threads, deja 1 núcleo libre para el sistema
                     }
                 ),
                 timeout=Config.OLLAMA_TIMEOUT
