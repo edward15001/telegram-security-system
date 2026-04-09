@@ -56,7 +56,13 @@ class AIAnalyzer:
             models = self.client.list()
             model_names = [model.get('model', model.get('name', '')) for model in models.get('models', [])]
             
-            if self.model not in model_names:
+            # Comparar ignorando el tag :latest para evitar falsos negativos
+            model_base = self.model.split(':')[0]
+            already_available = any(
+                m == self.model or m.startswith(model_base + ':') or m == model_base
+                for m in model_names
+            )
+            if not already_available:
                 logger.info(f"Descargando modelo {self.model}... (esto puede tardar varios minutos)")
                 self.client.pull(self.model)
                 logger.info(f"Modelo {self.model} descargado")
